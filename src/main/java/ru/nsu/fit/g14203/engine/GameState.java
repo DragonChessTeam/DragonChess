@@ -1,6 +1,7 @@
 package ru.nsu.fit.g14203.engine;
 
-public class GameState {
+public enum GameState {
+    ;
 
     private int WHITE_TURN;
 

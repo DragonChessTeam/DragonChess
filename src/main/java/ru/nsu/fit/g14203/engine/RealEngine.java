@@ -1,5 +1,10 @@
 package ru.nsu.fit.g14203.engine;
 
+import ru.nsu.fit.g14203.engine.guiapi.Observer;
+import ru.nsu.fit.g14203.engine.utils.Color;
+import ru.nsu.fit.g14203.engine.utils.Playground;
+import ru.nsu.fit.g14203.engine.utils.Way;
+
 import java.util.List;
 
 public class RealEngine implements Engine {

@@ -1,6 +1,11 @@
-package ru.nsu.fit.g14203.engine;
+package ru.nsu.fit.g14203.engine.pieces;
 
-public class Thief implements Piece {
+import ru.nsu.fit.g14203.engine.utils.Dot3D;
+import ru.nsu.fit.g14203.engine.utils.Playground;
+import ru.nsu.fit.g14203.engine.utils.Way;
+import ru.nsu.fit.g14203.engine.constraints.Constraint;
+
+public class Dwarf implements Piece {
 
 
     /**

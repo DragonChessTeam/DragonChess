@@ -1,4 +1,4 @@
-package ru.nsu.fit.g14203.engine;
+package ru.nsu.fit.g14203.engine.utils;
 
 public class Color {
 

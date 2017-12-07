@@ -1,7 +1,6 @@
 package ru.nsu.fit.g14203.engine;
 
 public enum EngineResponse {
-
     ;
 
     public int OK;

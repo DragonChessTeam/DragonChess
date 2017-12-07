@@ -1,4 +1,6 @@
-package ru.nsu.fit.g14203.engine;
+package ru.nsu.fit.g14203.engine.triggers;
+
+import ru.nsu.fit.g14203.engine.utils.Playground;
 
 public class BasiliskTrigger implements Trigger {
 

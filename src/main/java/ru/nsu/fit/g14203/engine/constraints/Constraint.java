@@ -1,4 +1,6 @@
-package ru.nsu.fit.g14203.engine;
+package ru.nsu.fit.g14203.engine.constraints;
+
+import ru.nsu.fit.g14203.engine.utils.Dot3D;
 
 public interface Constraint {
 
