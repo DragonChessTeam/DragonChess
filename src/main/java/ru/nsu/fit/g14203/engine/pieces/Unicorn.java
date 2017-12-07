@@ -5,7 +5,7 @@ import ru.nsu.fit.g14203.engine.utils.Playground;
 import ru.nsu.fit.g14203.engine.utils.Way;
 import ru.nsu.fit.g14203.engine.constraints.Constraint;
 
-public class Unicorn implements Piece {
+public class Unicorn extends BasicPiece {
 
 
     /**
@@ -39,20 +39,5 @@ public class Unicorn implements Piece {
         return null;
     }
 
-
-    /**
-     * @see Piece#addConstraint(Constraint)
-     */
-    public void addConstraint(Constraint effect) {
-
-    }
-
-
-    /**
-     * @see Piece#delConstraint(Constraint)
-     */
-    public void delConstraint(Constraint effect) {
-
-    }
 
 }

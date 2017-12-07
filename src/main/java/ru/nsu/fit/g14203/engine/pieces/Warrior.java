@@ -5,7 +5,7 @@ import ru.nsu.fit.g14203.engine.utils.Playground;
 import ru.nsu.fit.g14203.engine.utils.Way;
 import ru.nsu.fit.g14203.engine.constraints.Constraint;
 
-public class Warrior implements Piece {
+public class Warrior extends BasicPiece {
 
 
     /**
@@ -40,19 +40,6 @@ public class Warrior implements Piece {
     }
 
 
-    /**
-     * @see Piece#addConstraint(Constraint)
-     */
-    public void addConstraint(Constraint effect) {
 
-    }
-
-
-    /**
-     * @see Piece#delConstraint(Constraint)
-     */
-    public void delConstraint(Constraint effect) {
-
-    }
 
 }

@@ -5,7 +5,9 @@ import ru.nsu.fit.g14203.engine.utils.Playground;
 import ru.nsu.fit.g14203.engine.utils.Way;
 import ru.nsu.fit.g14203.engine.constraints.Constraint;
 
-public class Cleric implements Piece {
+import java.util.Base64;
+
+public class Cleric extends BasicPiece {
 
 
     /**
@@ -39,20 +41,5 @@ public class Cleric implements Piece {
         return null;
     }
 
-
-    /**
-     * @see Piece#addConstraint(Constraint)
-     */
-    public void addConstraint(Constraint effect) {
-
-    }
-
-
-    /**
-     * @see Piece#delConstraint(Constraint)
-     */
-    public void delConstraint(Constraint effect) {
-
-    }
 
 }

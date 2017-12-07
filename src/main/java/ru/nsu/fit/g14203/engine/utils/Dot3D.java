@@ -2,10 +2,10 @@ package ru.nsu.fit.g14203.engine.utils;
 
 public class Dot3D {
 
-    public Dot3D x;
+    public int x;
 
-    public Dot3D y;
+    public int y;
 
-    public Dot3D z;
+    public int z;
 
 }

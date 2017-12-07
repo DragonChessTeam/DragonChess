@@ -1,6 +1,8 @@
 package ru.nsu.fit.g14203.engine.utils;
 
-public class Color {
+public enum Color {
+
+    ;
 
     public int WHITE;
 

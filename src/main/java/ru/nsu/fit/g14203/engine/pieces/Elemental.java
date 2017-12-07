@@ -5,7 +5,7 @@ import ru.nsu.fit.g14203.engine.utils.Playground;
 import ru.nsu.fit.g14203.engine.utils.Way;
 import ru.nsu.fit.g14203.engine.constraints.Constraint;
 
-public class Elemental implements Piece {
+public class Elemental extends BasicPiece {
 
 
     /**
@@ -37,22 +37,6 @@ public class Elemental implements Piece {
      */
     public Dot3D[] getAvailableCaptures(Dot3D position, Playground boards) {
         return null;
-    }
-
-
-    /**
-     * @see Piece#addConstraint(Constraint)
-     */
-    public void addConstraint(Constraint effect) {
-
-    }
-
-
-    /**
-     * @see Piece#delConstraint(Constraint)
-     */
-    public void delConstraint(Constraint effect) {
-
     }
 
 }
