@@ -1,45 +1,17 @@
 package ru.nsu.fit.g14203.engine.pieces;
 
+import ru.nsu.fit.g14203.engine.utils.Color;
 import ru.nsu.fit.g14203.engine.utils.Dot3D;
 import ru.nsu.fit.g14203.engine.utils.Playground;
 import ru.nsu.fit.g14203.engine.utils.Way;
-import ru.nsu.fit.g14203.engine.constraints.Constraint;
+import ru.nsu.fit.g14203.engine.utils.line.DirectLine;
+import ru.nsu.fit.g14203.engine.utils.line.Sugar.TriagonalLine;
 
 public class Warrior extends BasicPiece {
-
-
-    /**
-     * @see Piece#isValidMove(Way, Playground)
-     */
-    public boolean isValidMove(Way turn, Playground boards) {
-        return false;
+    public Warrior(Color c) {
+        color = c;
+        moves.add(new DirectLine(2, new Dot3D(0,1,0),1));
+        captures.add(new TriagonalLine(false, new int[]{2}, 0, true, true, false, false, 1));
     }
-
-
-    /**
-     * @see Piece#isValidCapture(Way, Playground)
-     */
-    public boolean isValidCapture(Way turn, Playground boards) {
-        return false;
-    }
-
-
-    /**
-     * @see Piece#getAvailableMoves(Dot3D, Playground)
-     */
-    public Dot3D[] getAvailableMoves(Dot3D position, Playground boards) {
-        return null;
-    }
-
-
-    /**
-     * @see Piece#getAvailableCaptures(Dot3D, Playground)
-     */
-    public Dot3D[] getAvailableCaptures(Dot3D position, Playground boards) {
-        return null;
-    }
-
-
-
 
 }

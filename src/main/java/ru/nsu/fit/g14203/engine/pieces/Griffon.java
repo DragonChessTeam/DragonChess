@@ -1,43 +1,44 @@
 package ru.nsu.fit.g14203.engine.pieces;
 
+import ru.nsu.fit.g14203.engine.utils.Color;
 import ru.nsu.fit.g14203.engine.utils.Dot3D;
 import ru.nsu.fit.g14203.engine.utils.Playground;
 import ru.nsu.fit.g14203.engine.utils.Way;
-import ru.nsu.fit.g14203.engine.constraints.Constraint;
+import ru.nsu.fit.g14203.engine.utils.line.DirectLine;
+import ru.nsu.fit.g14203.engine.utils.line.GLine;
 
 public class Griffon extends BasicPiece {
 
 
-    /**
-     * @see Piece#isValidMove(Way, Playground)
-     */
-    public boolean isValidMove(Way turn, Playground boards) {
-        return false;
+    public Griffon(Color c) {
+        color = c;
+        //magic on level 3
+        moves.add(new GLine(3,  new DirectLine(3, new Dot3D(1,1,0), 2), new DirectLine(3, new Dot3D(1,0,0),1 )));
+        moves.add(new GLine(3,  new DirectLine(3, new Dot3D(1,1,0), 2), new DirectLine(3, new Dot3D(0,1,0),1 )));
+        moves.add(new GLine(3,  new DirectLine(3, new Dot3D(-1,1,0), 2), new DirectLine(3, new Dot3D(-1,0,0),1 )));
+        moves.add(new GLine(3,  new DirectLine(3, new Dot3D(-1,1,0), 2), new DirectLine(3, new Dot3D(0,1,0),1 )));
+        moves.add(new GLine(3,  new DirectLine(3, new Dot3D(-1,-1,0), 2), new DirectLine(3, new Dot3D(-1,0,0),1 )));
+        moves.add(new GLine(3,  new DirectLine(3, new Dot3D(-1,-1,0), 2), new DirectLine(3, new Dot3D(0,-1,0),1 )));
+        moves.add(new GLine(3,  new DirectLine(3, new Dot3D(1,-1,0), 2), new DirectLine(3, new Dot3D(1,0,0),1 )));
+        moves.add(new GLine(3,  new DirectLine(3, new Dot3D(1,-1,0), 2), new DirectLine(3, new Dot3D(0,-1,0),1 )));
+        //triagonal down
+        moves.add(new DirectLine(3, new Dot3D(1,1,-1), 1));
+        moves.add(new DirectLine(3, new Dot3D(1,-1,-1), 1));
+        moves.add(new DirectLine(3, new Dot3D(-1,-1,-1), 1));
+        moves.add(new DirectLine(3, new Dot3D(-1,1,-1), 1));
+        //triagonal up
+        moves.add(new DirectLine(2, new Dot3D(1,1,1), 1));
+        moves.add(new DirectLine(2, new Dot3D(1,-1,1), 1));
+        moves.add(new DirectLine(2, new Dot3D(-1,-1,1), 1));
+        moves.add(new DirectLine(2, new Dot3D(-1,1,1), 1));
+        //DiagonalLine on level 2
+        moves.add(new DirectLine(2, new Dot3D(1,1,0), 1));
+        moves.add(new DirectLine(2, new Dot3D(1,-1,0), 1));
+        moves.add(new DirectLine(2, new Dot3D(-1,-1,0), 1));
+        moves.add(new DirectLine(2, new Dot3D(-1,1,0), 1));
+
+
+        captures.addAll(moves);
+
     }
-
-
-    /**
-     * @see Piece#isValidCapture(Way, Playground)
-     */
-    public boolean isValidCapture(Way turn, Playground boards) {
-        return false;
-    }
-
-
-    /**
-     * @see Piece#getAvailableMoves(Dot3D, Playground)
-     */
-    public Dot3D[] getAvailableMoves(Dot3D position, Playground boards) {
-        return null;
-    }
-
-
-    /**
-     * @see Piece#getAvailableCaptures(Dot3D, Playground)
-     */
-    public Dot3D[] getAvailableCaptures(Dot3D position, Playground boards) {
-        return null;
-    }
-
-
 }

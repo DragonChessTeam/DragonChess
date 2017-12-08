@@ -20,4 +20,8 @@ public class Dot3D {
         return new Dot3D(this.x+other.x, this.y+other.y, this.z+other.z);
     }
 
+    public Dot3D sub(Dot3D other) {
+        return new Dot3D(this.x-other.x, this.y-other.y, this.z-other.z);
+    }
+
 }

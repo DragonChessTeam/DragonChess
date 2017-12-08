@@ -10,6 +10,8 @@ public class ClericTest extends TestCase {
     Cleric c = new Cleric(Color.WHITE);
     Playground board = new Playground();
 
+
+
     public void testIsValidMove() throws Exception {
         Dot3D pos = new Dot3D(5,5,1);
         board.ground[5][5][1] = c;
@@ -33,6 +35,7 @@ public class ClericTest extends TestCase {
     }
 
     public void testGetAvailableMoves() throws Exception {
+        Dot3D pos = new Dot3D(5,5,1);
     }
 
 }

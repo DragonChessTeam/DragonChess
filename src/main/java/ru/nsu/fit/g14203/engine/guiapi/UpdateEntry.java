@@ -1,6 +1,5 @@
 package ru.nsu.fit.g14203.engine.guiapi;
 
-import ru.nsu.fit.g14203.engine.pieces.Piece;
 import ru.nsu.fit.g14203.engine.utils.Dot3D;
 
 import java.util.List;

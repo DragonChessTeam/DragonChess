@@ -1,42 +1,47 @@
 package ru.nsu.fit.g14203.engine.pieces;
 
+import ru.nsu.fit.g14203.engine.utils.Color;
 import ru.nsu.fit.g14203.engine.utils.Dot3D;
 import ru.nsu.fit.g14203.engine.utils.Playground;
 import ru.nsu.fit.g14203.engine.utils.Way;
-import ru.nsu.fit.g14203.engine.constraints.Constraint;
+import ru.nsu.fit.g14203.engine.utils.line.DirectLine;
+import ru.nsu.fit.g14203.engine.utils.line.GLine;
+import ru.nsu.fit.g14203.engine.utils.line.RoundLine;
 
 public class Paladin extends BasicPiece {
+    public Paladin(Color c) {
+        moves.add(new RoundLine(2));
+        moves.add(new GLine(2, new DirectLine(2, new Dot3D(1,1,0),1), new DirectLine(2, new Dot3D(1,0,0),1)));
+        moves.add(new GLine(2, new DirectLine(2, new Dot3D(1,1,0),1), new DirectLine(2, new Dot3D(0,1,0),1)));
+        moves.add(new GLine(2, new DirectLine(2, new Dot3D(-1,1,0),1), new DirectLine(2, new Dot3D(-1,0,0),1)));
+        moves.add(new GLine(2, new DirectLine(2, new Dot3D(-1,1,0),1), new DirectLine(2, new Dot3D(0,1,0),1)));
+        moves.add(new GLine(2, new DirectLine(2, new Dot3D(-1,-1,0),1), new DirectLine(2, new Dot3D(-1,0,0),1)));
+        moves.add(new GLine(2, new DirectLine(2, new Dot3D(-1,-1,0),1), new DirectLine(2, new Dot3D(0,-1,0),1)));
+        moves.add(new GLine(2, new DirectLine(2, new Dot3D(1,-1,0),1), new DirectLine(2, new Dot3D(1,0,0),1)));
+        moves.add(new GLine(2, new DirectLine(2, new Dot3D(1,-1,0),1), new DirectLine(2, new Dot3D(0,-1,0),1)));
 
+        moves.add(new RoundLine(1));
+        moves.add(new RoundLine(3));
 
-    /**
-     * @see Piece#isValidMove(Way, Playground)
-     */
-    public boolean isValidMove(Way turn, Playground boards) {
-        return false;
+        captures.addAll(moves);
+
+        moves.add(new GLine(1, new DirectLine(1, new Dot3D(0,0,1),1), new DirectLine(2, new Dot3D(1,0,0),2)));
+        moves.add(new GLine(1, new DirectLine(1, new Dot3D(0,0,1),1), new DirectLine(2, new Dot3D(0,1,0),2)));
+        moves.add(new GLine(1, new DirectLine(1, new Dot3D(0,0,1),1), new DirectLine(2, new Dot3D(-1,0,0),2)));
+        moves.add(new GLine(1, new DirectLine(1, new Dot3D(0,0,1),1), new DirectLine(2, new Dot3D(0,-1,0),2)));
+        moves.add(new GLine(1, new DirectLine(1, new Dot3D(0,0,1),2), new DirectLine(3, new Dot3D(1,0,0),1)));
+        moves.add(new GLine(1, new DirectLine(1, new Dot3D(0,0,1),2), new DirectLine(3, new Dot3D(0,1,0),1)));
+        moves.add(new GLine(1, new DirectLine(1, new Dot3D(0,0,1),2), new DirectLine(3, new Dot3D(-1,0,0),1)));
+        moves.add(new GLine(1, new DirectLine(1, new Dot3D(0,0,1),2), new DirectLine(3, new Dot3D(0,-1,0),1)));
+
+        moves.add(new GLine(3, new DirectLine(3, new Dot3D(0,0,-1),1), new DirectLine(2, new Dot3D(1,0,0),2)));
+        moves.add(new GLine(3, new DirectLine(3, new Dot3D(0,0,-1),1), new DirectLine(2, new Dot3D(0,1,0),2)));
+        moves.add(new GLine(3, new DirectLine(3, new Dot3D(0,0,-1),1), new DirectLine(2, new Dot3D(-1,0,0),2)));
+        moves.add(new GLine(3, new DirectLine(3, new Dot3D(0,0,-1),1), new DirectLine(2, new Dot3D(0,-1,0),2)));
+        moves.add(new GLine(3, new DirectLine(3, new Dot3D(0,0,-1),2), new DirectLine(1, new Dot3D(1,0,0),1)));
+        moves.add(new GLine(3, new DirectLine(3, new Dot3D(0,0,-1),2), new DirectLine(1, new Dot3D(0,1,0),1)));
+        moves.add(new GLine(3, new DirectLine(3, new Dot3D(0,0,-1),2), new DirectLine(1, new Dot3D(-1,0,0),1)));
+        moves.add(new GLine(3, new DirectLine(3, new Dot3D(0,0,-1),2), new DirectLine(1, new Dot3D(0,-1,0),1)));
+
     }
-
-
-    /**
-     * @see Piece#isValidCapture(Way, Playground)
-     */
-    public boolean isValidCapture(Way turn, Playground boards) {
-        return false;
-    }
-
-
-    /**
-     * @see Piece#getAvailableMoves(Dot3D, Playground)
-     */
-    public Dot3D[] getAvailableMoves(Dot3D position, Playground boards) {
-        return null;
-    }
-
-
-    /**
-     * @see Piece#getAvailableCaptures(Dot3D, Playground)
-     */
-    public Dot3D[] getAvailableCaptures(Dot3D position, Playground boards) {
-        return null;
-    }
-
 }
