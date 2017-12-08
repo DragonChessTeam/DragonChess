@@ -6,4 +6,8 @@ public class Way {
 
     public Dot3D start;
 
+    public Way(Dot3D pos, Dot3D endPoint) {
+        end = endPoint;
+        start = pos;
+    }
 }
