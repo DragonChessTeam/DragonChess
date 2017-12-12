@@ -1,14 +1,7 @@
 package ru.nsu.fit.g14203.engine.pieces;
 
-import ru.nsu.fit.g14203.engine.utils.Color;
-import ru.nsu.fit.g14203.engine.utils.Dot3D;
-import ru.nsu.fit.g14203.engine.utils.Playground;
-import ru.nsu.fit.g14203.engine.utils.Way;
-import ru.nsu.fit.g14203.engine.utils.line.DirectLine;
 import ru.nsu.fit.g14203.engine.utils.line.Sugar.ChestLine;
 import ru.nsu.fit.g14203.engine.utils.line.Sugar.TriagonalLine;
-
-import java.net.Inet4Address;
 
 public class Mage extends BasicPiece {
 

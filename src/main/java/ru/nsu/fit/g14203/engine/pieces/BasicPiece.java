@@ -1,61 +1,34 @@
 package ru.nsu.fit.g14203.engine.pieces;
 
-import ru.nsu.fit.g14203.engine.constraints.Constraint;
-import ru.nsu.fit.g14203.engine.guiapi.GuiPiece;
-import ru.nsu.fit.g14203.engine.utils.*;
-import ru.nsu.fit.g14203.engine.utils.line.Line;
+import ru.nsu.fit.g14203.engine.api.Piece;
+import ru.nsu.fit.g14203.engine.api.utils.Color;
+import ru.nsu.fit.g14203.engine.api.utils.Dot3D;
+import ru.nsu.fit.g14203.engine.moveLanguage.constraints.Constraint;
+import ru.nsu.fit.g14203.engine.moveLanguage.Move;
 
 import java.util.*;
 
-public abstract  class BasicPiece implements GuiPiece {
+public class BasicPiece implements Piece {
 
     protected Color color;
     protected List<Constraint> constraints = new ArrayList<>();
 
-    protected List<Line> moves = new ArrayList<>();
-    protected List<Line> captures;
+    protected Move capture;
+    protected Move move;
 
 
     public Color getColor() {
         return color;
     }
 
-    public List<Dot3D> getMovePath(Way turn, Playground boards) {
-        for (Line moveSteps : moves) {
-            List<Dot3D> coveredMoveDots = moveSteps.getMoveCoveredBy(turn, boards);
-            if (coveredMoveDots != null) return coveredMoveDots;
-        }
-        return null;
-    }
-
-    public List<Dot3D> getCapturePath(Way turn, Playground boards) {
-        for (Line moveSteps : captures) {
-            List<Dot3D> coveredCaptureDots = moveSteps.getCaptureCoveredBy(turn, boards);
-            if (coveredCaptureDots != null) return coveredCaptureDots;
-        }
+    @Override
+    public List<Dot3D> getAvailableMoves(Dot3D position, Piece[][][] boards) {
         return null;
     }
 
     @Override
-    public Dot3D[] getAvailableMoves(Dot3D position, Playground boards) {
-        List<Dot3D> out = new ArrayList<>();
-        for (Line moveSteps : moves) {
-            List<Dot3D> coveredMoveDots = moveSteps.getAvailableMovesFrom(position, boards);
-            if (coveredMoveDots != null) out.addAll(coveredMoveDots);
-        }
-
-        return (Dot3D[]) out.toArray();
-    }
-
-    @Override
-    public Dot3D[] getAvailableCaptures(Dot3D position, Playground boards) {
-        List<Dot3D> out = new ArrayList<>();
-        for (Line moveSteps : captures) {
-            List<Dot3D> coveredMoveDots = moveSteps.getAvailableCapturesFrom(position, boards);
-            if (coveredMoveDots != null) out.addAll(coveredMoveDots);
-        }
-
-        return (Dot3D[]) out.toArray();
+    public List<Dot3D> getAvailableCaptures(Dot3D position, Piece[][][] boards) {
+        return null;
     }
 
 

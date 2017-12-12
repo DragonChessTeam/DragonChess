@@ -1,6 +1,4 @@
-package ru.nsu.fit.g14203.engine.constraints;
-
-import ru.nsu.fit.g14203.engine.utils.Dot3D;
+package ru.nsu.fit.g14203.engine.moveLanguage.constraints;
 
 public class Immobilize implements Constraint {
 

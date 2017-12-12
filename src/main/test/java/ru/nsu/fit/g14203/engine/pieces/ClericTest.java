@@ -1,10 +1,6 @@
 package ru.nsu.fit.g14203.engine.pieces;
 
 import junit.framework.TestCase;
-import ru.nsu.fit.g14203.engine.utils.Color;
-import ru.nsu.fit.g14203.engine.utils.Dot3D;
-import ru.nsu.fit.g14203.engine.utils.Playground;
-import ru.nsu.fit.g14203.engine.utils.Way;
 
 public class ClericTest extends TestCase {
     Cleric c = new Cleric(Color.WHITE);

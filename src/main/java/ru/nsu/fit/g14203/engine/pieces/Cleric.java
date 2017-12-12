@@ -1,24 +1,22 @@
 package ru.nsu.fit.g14203.engine.pieces;
 
-import ru.nsu.fit.g14203.engine.utils.Color;
-import ru.nsu.fit.g14203.engine.utils.Dot3D;
-import ru.nsu.fit.g14203.engine.utils.Playground;
-import ru.nsu.fit.g14203.engine.utils.Way;
-import ru.nsu.fit.g14203.engine.utils.line.DirectLine;
-import ru.nsu.fit.g14203.engine.utils.line.RoundLine;
+import ru.nsu.fit.g14203.engine.api.utils.Color;
+import ru.nsu.fit.g14203.engine.moveLanguage.BasicMove;
+import ru.nsu.fit.g14203.engine.moveLanguage.Move;
+import ru.nsu.fit.g14203.engine.moveLanguage.Or;
+import ru.nsu.fit.g14203.engine.moveLanguage.moves.RoundMove;
+import ru.nsu.fit.g14203.engine.moveLanguage.moves.StepMove;
 
-import java.util.ArrayList;
-import java.util.List;
+import static ru.nsu.fit.g14203.engine.api.utils.Dot3D.DOWN;
+import static ru.nsu.fit.g14203.engine.api.utils.Dot3D.UP;
 
 public class Cleric extends BasicPiece {
 
 
     public Cleric(Color c) {
         color = c;
-        moves.add(new RoundLine(-1));
-        moves.add(new DirectLine(-1, new Dot3D(0, 0, -1), 1));
-        moves.add(new DirectLine(-1, new Dot3D(0, 0, 1), 1));
-        captures = moves;
+        move = new Or(new Move[] {new RoundMove(), new StepMove(UP), new StepMove(DOWN)});
+        capture = move;
     }
 
 }
