@@ -1,11 +1,25 @@
 package ru.nsu.fit.g14203.engine.pieces;
 
-import ru.nsu.fit.g14203.engine.utils.line.Sugar.TriagonalLine;
+import ru.nsu.fit.g14203.engine.api.Piece;
+import ru.nsu.fit.g14203.engine.api.utils.Color;
+import ru.nsu.fit.g14203.engine.moveLanguage.Or;
+import ru.nsu.fit.g14203.engine.moveLanguage.UpToBorder;
+import ru.nsu.fit.g14203.engine.moveLanguage.constraints.LevelConstraint;
+import ru.nsu.fit.g14203.engine.moveLanguage.moves.StepMove;
+
+import static ru.nsu.fit.g14203.engine.api.utils.Dot3D.*;
 
 public class Thief extends BasicPiece {
-    public Thief(Color c) {
+    public Thief(Color c, Piece[][][] pg) {
         color = c;
-        moves.add(new TriagonalLine(true, new int[]{2}, 0, true, true, true, true, Integer.MAX_VALUE));
-        captures = moves;
+
+        move = new Or(
+                new UpToBorder(pg, new StepMove(FORWARD.sum(LEFT))),
+                new UpToBorder(pg, new StepMove(FORWARD.sum(RIGHT))),
+                new UpToBorder(pg, new StepMove(BACKWARD.sum(LEFT))),
+                new UpToBorder(pg, new StepMove(BACKWARD.sum(RIGHT)))
+        ).updateConstraints(new LevelConstraint(2));
+
+        capture = move;
     }
 }

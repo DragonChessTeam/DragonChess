@@ -1,8 +1,6 @@
 package ru.nsu.fit.g14203.engine.moveLanguage;
 
 import ru.nsu.fit.g14203.engine.api.utils.Dot3D;
-import ru.nsu.fit.g14203.engine.moveLanguage.BasicMove;
-import ru.nsu.fit.g14203.engine.moveLanguage.Move;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +11,7 @@ public class UpTo extends BasicMove {
     private Move m;
 
 
-    public UpTo(Move move, int maxMove) {
+    public UpTo(int maxMove, Move move) {
         steps = maxMove;
         m = move;
     }

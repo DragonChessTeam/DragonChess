@@ -14,7 +14,7 @@ public class Or  extends BasicMove{
         equalMoves[1] = move2;
     }
 
-    public Or(Move[] moves) {
+    public Or(Move... moves) {
         equalMoves = moves;
     }
 

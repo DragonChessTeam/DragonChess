@@ -1,8 +1,6 @@
 package ru.nsu.fit.g14203.engine.moveLanguage;
 
 import ru.nsu.fit.g14203.engine.api.utils.Dot3D;
-import ru.nsu.fit.g14203.engine.moveLanguage.BasicMove;
-import ru.nsu.fit.g14203.engine.moveLanguage.Move;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +10,7 @@ public class Is extends BasicMove {
     private int steps;
     private Move m;
 
-    public Is(Move move, int numSteps) {
+    public Is(int numSteps, Move move) {
         m = move;
         steps = numSteps;
     }

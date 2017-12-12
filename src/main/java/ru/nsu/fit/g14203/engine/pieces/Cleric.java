@@ -15,7 +15,7 @@ public class Cleric extends BasicPiece {
 
     public Cleric(Color c) {
         color = c;
-        move = new Or(new Move[] {new RoundMove(), new StepMove(UP), new StepMove(DOWN)});
+        move = new Or(new RoundMove(), new StepMove(UP), new StepMove(DOWN));
         capture = move;
     }
 
