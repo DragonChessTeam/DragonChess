@@ -4,7 +4,7 @@ import java.awt.image.BufferedImage;
 
 public interface ChessDesk {
 
-    public BufferedImage getDeskImage();
+    public BufferedImage getDeskImage(int windowWidth, int windowHeight);
 
     public void onBoardClick(int x, int y);
 

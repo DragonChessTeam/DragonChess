@@ -7,12 +7,12 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class boardImage{
+public class BoardImage {
 
     private BufferedImage originalImage;
     private BufferedImage pressedImage;
 
-    public boardImage(String path, int initalWidth, int initalHeight){
+    public BoardImage(String path, int initalWidth, int initalHeight){
 
         try {
             originalImage = ImageIO.read(new File(path));
