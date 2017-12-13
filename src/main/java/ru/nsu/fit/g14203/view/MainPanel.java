@@ -7,9 +7,7 @@ import java.awt.*;
 
 public class MainPanel extends JPanel{
 
-    private SingleDesk redDesk;
-    private BoardImage greenBoard;
-    private BoardImage blueBoard;
+    private DeskSwiper deskSwiper;
     private static double sideShift = 0.1;
 
 
@@ -17,7 +15,10 @@ public class MainPanel extends JPanel{
 
         setLayout(new BorderLayout());
 
-        redDesk = new SingleDesk("resources/redboard.jpg", 600, 400);
+        deskSwiper = new DeskSwiper(new SingleDesk("resources/redboard.jpg", 600, 400),
+                new SingleDesk("resources/greenboard.jpg", 600, 400),
+                new SingleDesk("resources/blueboard.jpg", 600, 400));
+        //redDesk = new SingleDesk("resources/redboard.jpg", 600, 400);
 
 /*        addComponentListener(new ComponentAdapter() {
             @Override
@@ -30,7 +31,7 @@ public class MainPanel extends JPanel{
     protected void paintComponent(Graphics g) {
 
         super.paintComponent(g);
-        g.drawImage(redDesk.getDeskImage(this.getWidth(), this.getHeight()), 0, 0, this);
+        g.drawImage(deskSwiper.getDesk().getDeskImage(this.getWidth(), this.getHeight()), 0, 0, this);
     }
 
 }
