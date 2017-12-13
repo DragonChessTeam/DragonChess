@@ -27,17 +27,14 @@ public class boardImage{
     public void scale(int windowWidth, int windowHeight){
 
         double scaleWidthCount = (double) windowWidth/ (double) originalImage.getWidth();
-        double scaleHeightCount = (double) windowHeight/(double) originalImage.getHeight();
+        double scaleHeightCount = (double) windowHeight/ (double) originalImage.getHeight();
         double scaleCount = Math.min(scaleHeightCount, scaleWidthCount);
 
-        if (windowWidth != originalImage.getWidth() * scaleCount) {
-            try {
-                pressedImage = Thumbnails.of(originalImage).scale(scaleCount).asBufferedImage();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }else return;
-
+        try {
+            pressedImage = Thumbnails.of(originalImage).scale(scaleCount).asBufferedImage();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void scaleByWidth(int width) throws IOException {
@@ -56,6 +53,10 @@ public class boardImage{
 
     public BufferedImage getImage(int windowWidth, int windowHeight){
         scale(windowWidth, windowHeight);
+        return pressedImage;
+    }
+
+    public BufferedImage getImage(){
         return pressedImage;
     }
 

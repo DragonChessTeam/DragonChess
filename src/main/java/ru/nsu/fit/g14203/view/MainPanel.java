@@ -16,6 +16,7 @@ public class MainPanel extends JPanel{
     private boardImage redBoard;
     private boardImage greenBoard;
     private boardImage blueBoard;
+    private static double sideShift = 0.1;
 
 
     public MainPanel(){
@@ -24,13 +25,12 @@ public class MainPanel extends JPanel{
 
         redBoard = new boardImage("resources/redboard.jpg",600, 400);
 
-    /*    addComponentListener(new ComponentAdapter() {
+/*        addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
-                onWindowResize();
+                redBoard.scale(e.getComponent().getWidth(), e.getComponent().getHeight());
             }
-        });
-*/
+        });*/
     }
 
     protected void paintComponent(Graphics g) {
