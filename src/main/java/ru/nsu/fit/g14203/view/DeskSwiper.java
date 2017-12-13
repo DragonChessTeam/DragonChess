@@ -2,10 +2,7 @@ package ru.nsu.fit.g14203.view;
 
 import ru.nsu.fit.g14203.view.desks.ChessDesk;
 
-import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.ListIterator;
-import java.util.Queue;
 
 public class DeskSwiper {
 
@@ -43,6 +40,16 @@ public class DeskSwiper {
             return deskList.get(currentIndex);
         else
             return deskList.get(--currentIndex);
+    }
+
+    public void incrementIndex(){
+        if(deskList.size() - 1 > currentIndex)
+            currentIndex++;
+    }
+
+    public void decrementIndex(){
+        if(currentIndex > 0)
+            currentIndex--;
     }
 
 }
