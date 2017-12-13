@@ -4,12 +4,12 @@ import ru.nsu.fit.g14203.view.BoardImage;
 
 import java.awt.image.BufferedImage;
 
-public class RedDesk implements ChessDesk{
+public class SingleDesk implements ChessDesk{
 
     private BoardImage boardImage;
 
-    public RedDesk(){
-        boardImage = new BoardImage("resources/redboard.jpg",600, 400);
+    public SingleDesk(String path, int initalWidth, int initalHeight){
+        boardImage = new BoardImage(path,initalWidth, initalHeight);
     }
 
     @Override

@@ -1,13 +1,13 @@
 package ru.nsu.fit.g14203.view;
 
-import ru.nsu.fit.g14203.view.desks.RedDesk;
+import ru.nsu.fit.g14203.view.desks.SingleDesk;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class MainPanel extends JPanel{
 
-    private RedDesk redDesk;
+    private SingleDesk redDesk;
     private BoardImage greenBoard;
     private BoardImage blueBoard;
     private static double sideShift = 0.1;
@@ -17,7 +17,7 @@ public class MainPanel extends JPanel{
 
         setLayout(new BorderLayout());
 
-        redDesk = new RedDesk();
+        redDesk = new SingleDesk("resources/redboard.jpg", 600, 400);
 
 /*        addComponentListener(new ComponentAdapter() {
             @Override
