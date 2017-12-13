@@ -28,7 +28,8 @@ public class MainPanel extends JPanel{
             public void keyPressed(KeyEvent e) {
 
                 switch (e.getKeyCode()){
-                    case KeyEvent.VK_RIGHT: deskSwiper.incrementIndex();
+                    case KeyEvent.VK_RIGHT: rightSwipe();
+                        deskSwiper.incrementIndex();
                         repaint();
                         break;
                     case KeyEvent.VK_LEFT: deskSwiper.decrementIndex();
@@ -40,18 +41,21 @@ public class MainPanel extends JPanel{
             }
         });
 
-/*        addComponentListener(new ComponentAdapter() {
-            @Override
-            public void componentResized(ComponentEvent e) {
-                redBoard.scale(e.getComponent().getWidth(), e.getComponent().getHeight());
-            }
-        });*/
     }
 
     protected void paintComponent(Graphics g) {
 
         super.paintComponent(g);
         g.drawImage(deskSwiper.getDesk().getDeskImage(this.getWidth(), this.getHeight()), 0, 0, this);
+    }
+
+    private void rightSwipe(){
+        int swipeSpeed = 5;
+        for(int i = 0; i <= this.getWidth(); i = i + swipeSpeed) {
+            this.getGraphics().drawImage(deskSwiper.getDesk().getDeskImage(this.getWidth(), this.getHeight()), -i, 0, this);
+            this.getGraphics().drawImage(deskSwiper.getNextDesk().getDeskImage(this.getWidth(), this.getHeight()), this.getWidth() - i, 0, this);
+            swipeSpeed = i + 1;
+        }
     }
 
 }

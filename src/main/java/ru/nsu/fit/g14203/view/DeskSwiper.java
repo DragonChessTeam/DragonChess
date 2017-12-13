@@ -28,14 +28,14 @@ public class DeskSwiper {
         else return deskList.get(currentIndex);
     }
 
-    public ChessDesk getNextDesk(){
+    public ChessDesk incrementNGetDesk(){
         if(deskList.size() - 1 == currentIndex)
             return deskList.get(currentIndex);
         else
             return deskList.get(++currentIndex);
     }
 
-    public ChessDesk getPreviousDesk(){
+    public ChessDesk decrementNGetsDesk(){
         if(currentIndex == 0)
             return deskList.get(currentIndex);
         else
@@ -50,6 +50,18 @@ public class DeskSwiper {
     public void decrementIndex(){
         if(currentIndex > 0)
             currentIndex--;
+    }
+
+    public ChessDesk getNextDesk(){
+        if(deskList.size() > currentIndex + 1)
+            return deskList.get(currentIndex + 1);
+        else return null;
+    }
+
+    public ChessDesk getPreviousDesk(){
+        if(currentIndex - 1 >= 0)
+            return deskList.get(currentIndex - 1);
+        else return null;
     }
 
 }
