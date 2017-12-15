@@ -16,17 +16,24 @@ public class RoundMove extends BasicMove {
 
     public RoundMove() {
         List<Move> moves = new ArrayList<>();
-        for (Dot3D a : new Dot3D[]{UP, DOWN, NONE})
+        for (Dot3D a : new Dot3D[]{LEFT, RIGHT, NONE})
             for (Dot3D b : new Dot3D[]{FORWARD, BACKWARD, NONE}) {
                 if (a == b) continue;
                 moves.add(new StepMove(a.sum(b)));
             }
-        move = new Or((Move[]) moves.toArray());
+        Move[] moveArr = new Move[moves.size()];
+        moves.toArray(moveArr);
+        move = new Or(moveArr);
     }
 
 
     public List<Dot3D> doMove(Dot3D pos) {
-        return move.getMovesFrom(pos);
+        try {
+            return move.getMovesFrom(pos);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }
