@@ -13,6 +13,8 @@
         <java.version>1.8</java.version>
         <sonar.host.url>http://84.237.50.237:8083</sonar.host.url>
         <sonar.projectKey>d2-chess</sonar.projectKey>
+        <sonar.sources>src/main/java</sonar.sources>
+        <sonar.java.binaries>target/classes/</sonar.java.binaries>
     </properties>
 
     <dependencies>
@@ -33,6 +35,13 @@
         <finalName>${project.artifactId}</finalName>
         <plugins>
 
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <argLine>@{argLine}</argLine>
+                </configuration>
+            </plugin>
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
