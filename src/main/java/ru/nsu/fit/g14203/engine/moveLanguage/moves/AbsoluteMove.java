@@ -1,5 +1,6 @@
 package ru.nsu.fit.g14203.engine.moveLanguage.moves;
 
+import ru.nsu.fit.g14203.engine.api.Piece;
 import ru.nsu.fit.g14203.engine.api.utils.Dot3D;
 import ru.nsu.fit.g14203.engine.moveLanguage.BasicMove;
 
@@ -14,7 +15,7 @@ public class AbsoluteMove extends BasicMove{
     }
 
     @Override
-    protected List<Dot3D> doMove(Dot3D pos) {
+    protected List<Dot3D> doMove(Dot3D pos, Piece[][][] boards) {
         List<Dot3D> out = new ArrayList<>();
         Dot3D outDot = new Dot3D();
         outDot.x = destination.x;

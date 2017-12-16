@@ -3,10 +3,11 @@ package ru.nsu.fit.g14203.engine.pieces;
 import ru.nsu.fit.g14203.engine.api.Piece;
 import ru.nsu.fit.g14203.engine.api.utils.Color;
 import ru.nsu.fit.g14203.engine.api.utils.Dot3D;
+import ru.nsu.fit.g14203.engine.constraints.BlockContraint;
+import ru.nsu.fit.g14203.engine.constraints.BoardBorderConstraint;
 import ru.nsu.fit.g14203.engine.constraints.CheckConstraint;
 import ru.nsu.fit.g14203.engine.constraints.StartLevelConstraint;
 import ru.nsu.fit.g14203.engine.moveLanguage.Or;
-import ru.nsu.fit.g14203.engine.moveLanguage.moves.AbsoluteMove;
 import ru.nsu.fit.g14203.engine.moveLanguage.moves.RoundMove;
 import ru.nsu.fit.g14203.engine.moveLanguage.moves.StepMove;
 
@@ -25,7 +26,7 @@ public class King extends BasicPiece {
                 new RoundMove(),
                 new StepMove(DOWN),
                 new StepMove(UP)
-        ).addConstraint(new StartLevelConstraint(2), new CheckConstraint(pg));
+        ).addConstraint(new BoardBorderConstraint(), new StartLevelConstraint(2), new CheckConstraint(),  new BlockContraint());
         capture = move;
     }
 

@@ -1,5 +1,6 @@
 package ru.nsu.fit.g14203.engine.moveLanguage;
 
+import ru.nsu.fit.g14203.engine.api.Piece;
 import ru.nsu.fit.g14203.engine.api.utils.Dot3D;
 
 import java.util.ArrayList;
@@ -16,11 +17,11 @@ public class Follow extends BasicMove {
     }
 
     @Override
-    public List<Dot3D> doMove(Dot3D pos) {
-        List<Dot3D> firstSteps = m1.getMovesFrom(pos);
+    public List<Dot3D> doMove(Dot3D pos, Piece[][][] boards) {
+        List<Dot3D> firstSteps = m1.getMovesFrom(pos,boards );
         List<Dot3D> out = new ArrayList<>();
         for (Dot3D halfEnd : firstSteps) {
-            out.addAll(m2.getMovesFrom(halfEnd));
+            out.addAll(m2.getMovesFrom(halfEnd,boards ));
         }
 
         return out;

@@ -1,5 +1,6 @@
 package ru.nsu.fit.g14203.engine.moveLanguage.moves;
 
+import ru.nsu.fit.g14203.engine.api.Piece;
 import ru.nsu.fit.g14203.engine.api.utils.Dot3D;
 import ru.nsu.fit.g14203.engine.moveLanguage.BasicMove;
 import ru.nsu.fit.g14203.engine.moveLanguage.Move;
@@ -27,9 +28,9 @@ public class RoundMove extends BasicMove {
     }
 
 
-    public List<Dot3D> doMove(Dot3D pos) {
+    public List<Dot3D> doMove(Dot3D pos, Piece[][][] boards) {
         try {
-            return move.getMovesFrom(pos);
+            return move.getMovesFrom(pos, boards);
         } catch (Exception e) {
             e.printStackTrace();
         }

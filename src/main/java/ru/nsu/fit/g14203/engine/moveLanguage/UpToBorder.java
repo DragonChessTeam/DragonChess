@@ -17,7 +17,7 @@ public class UpToBorder extends BasicMove {
     }
 
     @Override
-    public List<Dot3D> doMove(Dot3D pos) {
+    public List<Dot3D> doMove(Dot3D pos, Piece[][][] boards) {
 
         List<Dot3D> out = new ArrayList<>();
 
@@ -32,7 +32,7 @@ public class UpToBorder extends BasicMove {
             stepIsGood = false;
             for (Dot3D start : stepIn) {
                 if (start.x >= 0 && start.x < pl.length && start.y >= 0 && start.y < pl[0].length && start.z >= 0 && start.z < pl[0][0].length) {
-                    stepOut.addAll(m.getMovesFrom(start));
+                    stepOut.addAll(m.getMovesFrom(start, boards));
                     stepIsGood = true;
                 }
             }

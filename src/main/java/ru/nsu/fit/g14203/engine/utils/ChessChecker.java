@@ -13,18 +13,17 @@ public class ChessChecker {
 
     public static boolean isCheckAfterTurn(Way move, Color side, Piece[][][] pg) {
 
-        Piece savedPiece = pg[move.end.x][move.end.y][move.end.z-1];
-        pg[move.end.x][move.end.y][move.end.z-1] = pg[move.start.x][move.start.y][move.start.z-1];
-        pg[move.start.x][move.start.y][move.start.z-1] = null;
+        Piece savedPiece = pg[move.end.x][move.end.y][move.end.z];
+        pg[move.end.x][move.end.y][move.end.z] = pg[move.start.x][move.start.y][move.start.z];
+        pg[move.start.x][move.start.y][move.start.z] = null;
         boolean result = isCheckFor(side, pg);
-        pg[move.start.x][move.start.y][move.start.z-1] = pg[move.end.x][move.end.y][move.end.z-1];
-        pg[move.end.x][move.end.y][move.end.z-1] = savedPiece;
+        pg[move.start.x][move.start.y][move.start.z] = pg[move.end.x][move.end.y][move.end.z];
+        pg[move.end.x][move.end.y][move.end.z] = savedPiece;
 
         return result;
     }
 
     public static boolean isCheckFor(Color side, Piece[][][] pg) {
-int i2 = 0;
 
         //Find our king
         List<Dot3D> places = PieceFinder.findPiece(pg, King.class, side);
@@ -36,8 +35,8 @@ int i2 = 0;
                 for (int z = 0; z < pg[0][0].length; z++)
                     if (pg[x][y][z] != null && pg[x][y][z].getColor() != side){
                         pg[x][y][z].getCaptureAlg().removeConstraint(CheckConstraint.class);
-                        List<Dot3D> ends = pg[x][y][z].getAvailableCaptures(new Dot3D(x,y,z+1), pg);
-                        pg[x][y][z].getCaptureAlg().addConstraint(new CheckConstraint(pg));
+                        List<Dot3D> ends = pg[x][y][z].getAvailableCaptures(new Dot3D(x,y,z), pg);
+                        pg[x][y][z].getCaptureAlg().addConstraint(new CheckConstraint());
 
                         for (Dot3D otherFigureEnd : ends) {
                             if (otherFigureEnd.equals(kingPos)) return true;
@@ -50,9 +49,9 @@ int i2 = 0;
     public static boolean isCheckMateFor(Color side, Piece[][][] pg) {
         List<Dot3D> piecePlaces = PieceFinder.findPiece(pg, side);
         for(Dot3D pos : piecePlaces) {
-            List<Dot3D> availMoves = pg[pos.x][pos.y][pos.z-1].getAvailableMoves(pos, pg);
+            List<Dot3D> availMoves = pg[pos.x][pos.y][pos.z].getAvailableMoves(pos, pg);
             if (!availMoves.isEmpty()) return false;
-            availMoves = pg[pos.x][pos.y][pos.z-1].getAvailableCaptures(pos, pg);
+            availMoves = pg[pos.x][pos.y][pos.z].getAvailableCaptures(pos, pg);
             if (!availMoves.isEmpty()) return false;
         }
 

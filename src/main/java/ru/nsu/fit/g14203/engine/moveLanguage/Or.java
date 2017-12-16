@@ -1,5 +1,6 @@
 package ru.nsu.fit.g14203.engine.moveLanguage;
 
+import ru.nsu.fit.g14203.engine.api.Piece;
 import ru.nsu.fit.g14203.engine.api.utils.Dot3D;
 
 import java.util.ArrayList;
@@ -20,10 +21,10 @@ public class Or  extends BasicMove{
 
 
     @Override
-    protected List<Dot3D> doMove(Dot3D pos) {
+    protected List<Dot3D> doMove(Dot3D pos, Piece[][][] boards) {
         List<Dot3D> out = new ArrayList<>();
         for (Move m : equalMoves) {
-            out.addAll(m.getMovesFrom(pos));
+            out.addAll(m.getMovesFrom(pos, boards));
         }
         return out;
     }

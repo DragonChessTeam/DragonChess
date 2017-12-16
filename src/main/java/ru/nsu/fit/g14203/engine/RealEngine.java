@@ -40,7 +40,7 @@ public class RealEngine implements Engine {
     }
 
     private EngineResponse shiftPiece(Dot3D start, Dot3D end, boolean isCapture, Piece[][][] boards) {
-        Piece piece = this.boards[start.x][start.y][start.z-1];
+        Piece piece = this.boards[start.x][start.y][start.z];
         List<Dot3D> endPoints = new ArrayList<>();
         if (piece != null)
             if (isCapture) {
@@ -70,9 +70,6 @@ public class RealEngine implements Engine {
         EngineResponse moveResult = shiftPiece(start, end, isCapture, boards);
         EngineResponse out = OK;
         if (moveResult == WRONG_WAY) {
-            List<UpdateEntry> updates = new ArrayList<>();
-            updates.add(new UpdateEntry(null, start, end));
-            notifyObservers(updates);
             return WRONG_WAY;
         }
         if ((color == WHITE && ChessChecker.isCheckMateFor(BLACK, boards)) || (color == BLACK && ChessChecker.isCheckMateFor(WHITE, boards))) {

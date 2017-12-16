@@ -1,5 +1,6 @@
 package ru.nsu.fit.g14203.engine.moveLanguage;
 
+import ru.nsu.fit.g14203.engine.api.Piece;
 import ru.nsu.fit.g14203.engine.api.utils.Dot3D;
 import ru.nsu.fit.g14203.engine.constraints.Constraint;
 
@@ -11,14 +12,14 @@ public abstract class BasicMove implements Move{
 
     protected List<Constraint> constraints = new ArrayList<>();
 
-    abstract protected List<Dot3D> doMove(Dot3D pos);
+    abstract protected List<Dot3D> doMove(Dot3D pos, Piece[][][] boards);
 
-    public List<Dot3D> getMovesFrom(Dot3D pos) {
-        List<Dot3D> out = doMove(pos);
+    public List<Dot3D> getMovesFrom(Dot3D pos, Piece[][][] boards) {
+        List<Dot3D> out = doMove(pos,boards );
 
         if (constraints != null)
         for (Constraint c : constraints) {
-            c.changeCapture(out, pos);
+            c.changeMove(out, pos, boards);
         }
 
         return out;

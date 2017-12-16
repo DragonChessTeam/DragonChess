@@ -14,7 +14,7 @@ public class PieceFinder {
             for(int y = 0; y < boards[0].length; y++)
                 for (int z = 0; z < boards[0][0].length; z++)
                     if (boards[x][y][z] != null && boards[x][y][z].getColor() == color && boards[x][y][z].getClass().getName().equals(pieceType.getName()))
-                        out.add(new Dot3D(x,y,z+1));
+                        out.add(new Dot3D(x,y,z));
         return out;
     }
 
@@ -24,7 +24,7 @@ public class PieceFinder {
             for(int y = 0; y < boards[0].length; y++)
                 for (int z = 0; z < boards[0][0].length; z++)
                     if (boards[x][y][z] != null && boards[x][y][z].getColor() == side)
-                        out.add(new Dot3D(x,y,z+1));
+                        out.add(new Dot3D(x,y,z));
         return out;
     }
 }

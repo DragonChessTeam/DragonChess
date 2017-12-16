@@ -9,18 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CheckConstraint implements Constraint{
-
-    private Piece[][][] pg;
-
-    public CheckConstraint(Piece[][][] board) {
-        pg = board;
-    }
-
     @Override
-    public void changeMove(List<Dot3D> ends, Dot3D start) {
+    public void changeMove(List<Dot3D> ends, Dot3D start, Piece[][][] boards) {
         List<Dot3D> out = new ArrayList<>();
         for (Dot3D end : ends) {
-            if (!ChessChecker.isCheckAfterTurn(new Way(start, end), pg[start.x][start.y][start.z].getColor(), pg))
+            if (!ChessChecker.isCheckAfterTurn(new Way(start, end), boards[start.x][start.y][start.z].getColor(), boards))
                 out.add(end);
         }
         ends.clear();
@@ -28,10 +21,10 @@ public class CheckConstraint implements Constraint{
     }
 
     @Override
-    public void changeCapture(List<Dot3D> ends, Dot3D start) {
+    public void changeCapture(List<Dot3D> ends, Dot3D start, Piece[][][] boards) {
         List<Dot3D> out = new ArrayList<>();
         for (Dot3D end : ends) {
-            if (!ChessChecker.isCheckAfterTurn(new Way(start, end), pg[start.x][start.y][start.z].getColor(), pg))
+            if (!ChessChecker.isCheckAfterTurn(new Way(start, end), boards[start.x][start.y][start.z].getColor(), boards))
                 out.add(end);
         }
         ends.clear();
