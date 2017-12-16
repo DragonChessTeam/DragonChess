@@ -14,7 +14,6 @@
         <sonar.host.url>http://84.237.50.237:8083</sonar.host.url>
         <sonar.projectKey>d2-chess</sonar.projectKey>
         <sonar.sources>src/main/java</sonar.sources>
-        <sonar.java.binaries>target/classes/</sonar.java.binaries>
     </properties>
 
     <dependencies>
