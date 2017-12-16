@@ -32,6 +32,15 @@ public class EngineTestMain {
         res = eng.doMove(WHITE, new Way(new Dot3D(3,0,1), new Dot3D(4,0,1)));
         o.update(new ArrayList<>());
         System.out.println("Turn status: " + res);
+        res = eng.doMove(BLACK, new Way(new Dot3D(6,7,1), new Dot3D(5,7,1)));
+        o.update(new ArrayList<>());
+        System.out.println("Turn status: " + res);
+        res = eng.doMove(WHITE, new Way(new Dot3D(4,0,1), new Dot3D(5,0,1)));
+        o.update(new ArrayList<>());
+        System.out.println("Turn status: " + res);
+        res = eng.doMove(BLACK, new Way(new Dot3D(6,1,1), new Dot3D(5,0,1)));
+        o.update(new ArrayList<>());
+        System.out.println("Turn status: " + res);
     }
 
 }

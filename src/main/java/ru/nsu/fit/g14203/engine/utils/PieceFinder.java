@@ -18,7 +18,7 @@ public class PieceFinder {
         return out;
     }
 
-    public static List<Dot3D> findPiece(Piece[][][] boards, Color side) {
+    public static List<Dot3D> findPieces(Piece[][][] boards, Color side) {
         List<Dot3D> out = new ArrayList<>();
         for (int x = 0; x < boards.length; x++)
             for(int y = 0; y < boards[0].length; y++)

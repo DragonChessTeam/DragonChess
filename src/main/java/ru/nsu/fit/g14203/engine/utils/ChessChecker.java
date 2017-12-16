@@ -47,7 +47,7 @@ public class ChessChecker {
     }
     
     public static boolean isCheckMateFor(Color side, Piece[][][] pg) {
-        List<Dot3D> piecePlaces = PieceFinder.findPiece(pg, side);
+        List<Dot3D> piecePlaces = PieceFinder.findPieces(pg, side);
         for(Dot3D pos : piecePlaces) {
             List<Dot3D> availMoves = pg[pos.x][pos.y][pos.z].getAvailableMoves(pos, pg);
             if (!availMoves.isEmpty()) return false;
