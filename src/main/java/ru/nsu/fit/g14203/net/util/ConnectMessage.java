@@ -10,4 +10,11 @@ public class ConnectMessage extends Message {
     public Object getContent() {
         return null;
     }
+
+    @Override
+    public String toString() {
+        return "{ " +
+               "type : connect " +
+               "}";
+    }
 }

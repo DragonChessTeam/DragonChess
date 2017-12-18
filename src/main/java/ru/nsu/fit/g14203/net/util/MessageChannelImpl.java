@@ -2,18 +2,20 @@ package ru.nsu.fit.g14203.net.util;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import java.nio.channels.ReadableByteChannel;
+import java.nio.channels.ByteChannel;
 import java.nio.channels.SelectionKey;
-import java.nio.channels.WritableByteChannel;
 import java.util.*;
 
 //  TODO: (1): Add incorrect message format handling.
 
 public class MessageChannelImpl implements MessageChannel {
+
+    private static final Logger LOG = Logger.getLogger(MessageChannel.class);
 
     private final Set<MessageReceiver> receivers = new HashSet<>();
     private static final Message DISCONNECT = new DisconnectMessage();
@@ -37,6 +39,7 @@ public class MessageChannelImpl implements MessageChannel {
     public boolean addReceiver(MessageReceiver messageReceiver) {
         final boolean add = receivers.add(messageReceiver);
         if (add) {
+            LOG.info("add receiver : " + messageReceiver);
             int interestOpts = key.interestOps();
             key.interestOps(interestOpts | SelectionKey.OP_READ);
         }
@@ -48,6 +51,7 @@ public class MessageChannelImpl implements MessageChannel {
     public boolean removeReceiver(MessageReceiver messageReceiver) {
         final boolean remove = receivers.remove(messageReceiver);
         if (remove && receivers.isEmpty()) {
+            LOG.info("remove receiver : " + messageReceiver);
             int interestOpts = key.interestOps();
             key.interestOps(interestOpts & ~SelectionKey.OP_READ);
         }
@@ -60,6 +64,8 @@ public class MessageChannelImpl implements MessageChannel {
         final byte[] bytes = mapper.writeValueAsBytes(message);
         sendQueue.add(ByteBuffer.wrap(bytes));
 
+        LOG.info("send message : " + message);
+
         int interestOpts = key.interestOps();
         key.interestOps(interestOpts | SelectionKey.OP_WRITE);
     }
@@ -67,14 +73,21 @@ public class MessageChannelImpl implements MessageChannel {
     private void receive(Message message) {
         receivers.forEach(receiver -> receiver.receive(message));
 
+        LOG.info("receive message : " + message);
+
         if (sendQueue.isEmpty()) {
             int interestOpts = key.interestOps();
             key.interestOps(interestOpts & ~SelectionKey.OP_WRITE);
         }
     }
 
+    /**
+     * Write message to connected ByteChannel.
+     *
+     * @throws IOException if IO error occurs
+     */
     public void writeChannel() throws IOException {
-        final WritableByteChannel channel = (WritableByteChannel) key.channel();
+        final ByteChannel channel = (ByteChannel) key.channel();
         if (sendBuffer == null) {
             sendBuffer = sendQueue.poll();
             if (sendBuffer == null)
@@ -95,8 +108,13 @@ public class MessageChannelImpl implements MessageChannel {
             sendBuffer = null;
     }
 
+    /**
+     * Read message from connected ByteChannel.
+     *
+     * @throws IOException if IO error occurs
+     */
     public void readChannel() throws IOException {
-        final ReadableByteChannel channel = (ReadableByteChannel) key.channel();
+        final ByteChannel channel = (ByteChannel) key.channel();
         if (receiveBuffer == null) {
             channel.read(receiveLengthBuffer);
             if (receiveLengthBuffer.hasRemaining())
@@ -113,6 +131,7 @@ public class MessageChannelImpl implements MessageChannel {
         receive(readMessage());
     }
 
+    @SuppressWarnings("unchecked")
     private Message readMessage() throws IOException {
         final Map<String, Object> tmp = mapper.readValue(receiveBuffer.array(), Map.class); //  TODO: (1)
         int type;

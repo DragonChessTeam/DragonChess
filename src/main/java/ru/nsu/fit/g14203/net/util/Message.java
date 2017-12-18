@@ -2,6 +2,9 @@ package ru.nsu.fit.g14203.net.util;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Base Message class for MessageChannel.
+ */
 public abstract class Message {
 
     public static final int TYPE_CONNECT        = 1;
@@ -19,6 +22,12 @@ public abstract class Message {
         return type;
     }
 
+    /**
+     * @return JSON serialisable message content
+     */
     @JsonProperty(value = "content")
     public abstract Object getContent();
+
+    @Override
+    public abstract String toString();
 }

@@ -24,4 +24,12 @@ public class AcceptMessage extends Message {
     public Object getContent() {
         return clientColor;
     }
+
+    @Override
+    public String toString() {
+        return "{ " +
+               "type : accept, " +
+               "color : " + clientColor + " " +
+               "}";
+    }
 }
