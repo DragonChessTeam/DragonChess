@@ -1,5 +1,6 @@
 package ru.nsu.fit.g14203.net.util;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import ru.nsu.fit.g14203.engine.api.Piece;
 import ru.nsu.fit.g14203.engine.api.utils.Color;
@@ -11,17 +12,26 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class UpdateMessage extends Message {
 
     private final UpdateEntry updateEntry;
+
+    public UpdateMessage(UpdateEntry updateEntry) {
+        super(TYPE_UPDATE);
+
+        this.updateEntry = updateEntry;
+    }
 
     @SuppressWarnings("unchecked")
     public UpdateMessage(@JsonProperty(value = "content") Map<String, Object> content) {
         super(TYPE_UPDATE);
 
         updateEntry = new UpdateEntry();
-        updateEntry.fullPath = (List<Dot3D>) content.get("path");
+        updateEntry.fullPath = ((List<Map<String, Integer>>) content.get("path")).stream()
+                .map(map -> new Dot3D(map.get("x"), map.get("y"), map.get("z")))
+                .collect(Collectors.toList());
 
         final String className = (String) content.get("piece");
         if (className == null)
@@ -42,10 +52,9 @@ public class UpdateMessage extends Message {
         }
     }
 
-    public UpdateMessage(UpdateEntry updateEntry) {
-        super(TYPE_UPDATE);
-
-        this.updateEntry = updateEntry;
+    @JsonIgnore
+    public UpdateEntry getUpdateEntry() {
+        return updateEntry;
     }
 
     @Override

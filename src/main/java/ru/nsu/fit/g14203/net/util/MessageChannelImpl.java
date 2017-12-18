@@ -11,8 +11,6 @@ import java.nio.channels.ByteChannel;
 import java.nio.channels.SelectionKey;
 import java.util.*;
 
-//  TODO: (1): Add incorrect message format handling.
-
 public class MessageChannelImpl implements MessageChannel {
 
     private static final Logger LOG = Logger.getLogger(MessageChannel.class);
@@ -74,11 +72,6 @@ public class MessageChannelImpl implements MessageChannel {
         receivers.forEach(receiver -> receiver.receive(message));
 
         LOG.info("receive message : " + message);
-
-        if (sendQueue.isEmpty()) {
-            int interestOpts = key.interestOps();
-            key.interestOps(interestOpts & ~SelectionKey.OP_WRITE);
-        }
     }
 
     /**
@@ -95,6 +88,7 @@ public class MessageChannelImpl implements MessageChannel {
 
             sendLengthBuffer.clear();
             sendLengthBuffer.putInt(sendBuffer.limit());
+            sendLengthBuffer.flip();
         }
 
         if (sendLengthBuffer.hasRemaining()) {
@@ -104,8 +98,14 @@ public class MessageChannelImpl implements MessageChannel {
         }
 
         channel.write(sendBuffer);
-        if (!sendBuffer.hasRemaining())
-            sendBuffer = null;
+        if (sendBuffer.hasRemaining())
+            return;
+
+        sendBuffer = null;
+        if (sendQueue.isEmpty()) {
+            int interestOpts = key.interestOps();
+            key.interestOps(interestOpts & ~SelectionKey.OP_WRITE);
+        }
     }
 
     /**
@@ -122,23 +122,29 @@ public class MessageChannelImpl implements MessageChannel {
 
             receiveLengthBuffer.flip();
             receiveBuffer = ByteBuffer.allocate(receiveLengthBuffer.getInt());
+            receiveLengthBuffer.clear();
         }
 
         channel.read(receiveBuffer);
         if (receiveBuffer.hasRemaining())
             return;
 
-        receive(readMessage());
+        try {
+            receive(readMessage());
+        } catch (MessageFormatException e) {
+            LOG.warn("invalid message format");
+            throw e;
+        }
     }
 
     @SuppressWarnings("unchecked")
     private Message readMessage() throws IOException {
-        final Map<String, Object> tmp = mapper.readValue(receiveBuffer.array(), Map.class); //  TODO: (1)
         int type;
         try {
+            final Map<String, Object> tmp = mapper.readValue(receiveBuffer.array(), Map.class);
             type = (int) tmp.get("type");
         } catch (Exception e) {
-            throw new IOException(e);   //  TODO: (1)
+            throw new MessageFormatException(e);
         }
 
         Class<? extends Message> messageClass;
@@ -156,10 +162,14 @@ public class MessageChannelImpl implements MessageChannel {
                 messageClass = DisconnectMessage.class;
                 break;
             default:
-                throw new IOException();    //  TODO: (1)
+                throw new MessageFormatException();
         }
 
-        return mapper.readValue(receiveBuffer.array(), messageClass);   //  TODO: (1)
+        try {
+            return mapper.readValue(receiveBuffer.array(), messageClass);
+        } catch (Exception e) {
+            throw new MessageFormatException(e);
+        }
     }
 
     @Override
