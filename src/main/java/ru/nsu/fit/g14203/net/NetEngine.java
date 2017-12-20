@@ -21,6 +21,16 @@ public class NetEngine implements Engine, MessageReceiver {
     private final Engine engine;
     private final GameThread thread;
 
+    /**
+     * Creates Engine for network game.
+     *
+     * @param type can be SERVER for start game or CLIENT for join game
+     * @param address local address for SERVER of remote address for CLIENT
+     * @param engine engine to use in game
+     * @param connectHandler method to be called after accept (SERVER) or connect (CLIENT)
+     * @param disconnectHandler method to be called after opponent disconnect
+     * @throws IOException if some IO errors with sockets occurs during initialisation
+     */
     public NetEngine(Type type, SocketAddress address, Engine engine,
                      Consumer<Color> connectHandler, Runnable disconnectHandler)
             throws IOException {
