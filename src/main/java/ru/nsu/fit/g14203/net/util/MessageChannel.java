@@ -30,7 +30,6 @@ public interface MessageChannel extends Closeable {
      * Add message to the send queue.
      *
      * @param message to be added
-     * @throws IOException if some IO error happens during message serialisation
      */
-    void send(@NotNull Message message) throws IOException;
+    void send(@NotNull Message message);
 }

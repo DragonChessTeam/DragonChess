@@ -2,13 +2,11 @@ package ru.nsu.fit.g14203.net.util;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
-import ru.nsu.fit.g14203.engine.api.Piece;
 import ru.nsu.fit.g14203.engine.api.utils.Color;
 import ru.nsu.fit.g14203.engine.api.utils.Dot3D;
-import ru.nsu.fit.g14203.engine.api.utils.UpdateEntry;
+import ru.nsu.fit.g14203.engine.api.utils.Way;
 
 import java.io.IOException;
-import java.util.Collections;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -33,42 +31,7 @@ public class MessageJSONTests {
         final AcceptMessage accept = mapper.readValue(bytes, AcceptMessage.class);
 
         assertThat(accept.getType(), is(message.getType()));
-        assertThat(accept.getClientColor(), is(Color.WHITE));
-    }
-
-    @Test
-    public void messageUpdateNotNullTest() throws IOException {
-        final UpdateEntry entry = new UpdateEntry();
-        entry.fullPath = Collections.singletonList(new Dot3D(1, 2, 3));
-
-        final Message message = new UpdateMessage(entry);
-        final byte[] bytes = mapper.writeValueAsBytes(message);
-        final UpdateMessage update = mapper.readValue(bytes, UpdateMessage.class);
-
-        assertThat(update.getType(), is(message.getType()));
-        assertThat(update.getUpdateEntry().pieceToPlace, is((Piece) null));
-        assertThat(update.getUpdateEntry().fullPath.get(0).x, is(1));
-        assertThat(update.getUpdateEntry().fullPath.get(0).y, is(2));
-        assertThat(update.getUpdateEntry().fullPath.get(0).z, is(3));
-    }
-
-    @Test
-    public void messageUpdateNullTest() throws IOException {
-        final Piece piece = new TestPiece(Color.WHITE);
-
-        final UpdateEntry entry = new UpdateEntry();
-        entry.fullPath = Collections.singletonList(new Dot3D(1, 2, 3));
-        entry.pieceToPlace = piece;
-
-        final Message message = new UpdateMessage(entry);
-        final byte[] bytes = mapper.writeValueAsBytes(message);
-        final UpdateMessage update = mapper.readValue(bytes, UpdateMessage.class);
-
-        assertThat(update.getType(), is(message.getType()));
-        assertThat(update.getUpdateEntry().pieceToPlace, is(piece));
-        assertThat(update.getUpdateEntry().fullPath.get(0).x, is(1));
-        assertThat(update.getUpdateEntry().fullPath.get(0).y, is(2));
-        assertThat(update.getUpdateEntry().fullPath.get(0).z, is(3));
+        assertThat(accept.getColor(), is(Color.WHITE));
     }
 
     @Test
@@ -78,5 +41,19 @@ public class MessageJSONTests {
         final DisconnectMessage disconnect = mapper.readValue(bytes, DisconnectMessage.class);
 
         assertThat(disconnect.getType(), is(message.getType()));
+    }
+
+    @Test
+    public void messageStepTest() throws IOException {
+        final Way way = new Way(new Dot3D(1, 2, 3), new Dot3D(3, 2, 1));
+
+        final Message message = new StepMessage(Message.TYPE_CAPTURE, Color.WHITE, way);
+        final byte[] bytes = mapper.writeValueAsBytes(message);
+        final StepMessage step = mapper.readValue(bytes, StepMessage.class);
+
+        assertThat(step.getType(), is(message.getType()));
+        assertThat(step.getColor(), is(Color.WHITE));
+        assertThat(step.getWay().start, is(step.getWay().start));
+        assertThat(step.getWay().end, is(step.getWay().end));
     }
 }

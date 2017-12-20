@@ -1,41 +1,28 @@
 package ru.nsu.fit.g14203.net.util;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import ru.nsu.fit.g14203.engine.api.utils.Color;
 
 public class AcceptMessage extends Message {
 
-    public static final String WHITE = "white";
-    public static final String BLACK = "black";
+    private final Color color;
 
-    private final Color clientColor;
-
-    public AcceptMessage(Color clientColor) {
+    @JsonCreator
+    public AcceptMessage(@JsonProperty(value = "color") Color color) {
         super(TYPE_ACCEPT);
-        this.clientColor = clientColor;
+        this.color = color;
     }
 
-    public AcceptMessage(@JsonProperty(value = "content") String content) {
-        super(TYPE_ACCEPT);
-        this.clientColor = Color.valueOf(content);
-    }
-
-    @JsonIgnore
-    public Color getClientColor() {
-        return clientColor;
-    }
-
-    @Override
-    public Object getContent() {
-        return clientColor.name();
+    public Color getColor() {
+        return color;
     }
 
     @Override
     public String toString() {
         return "{ " +
                "type : accept, " +
-               "color : " + clientColor.name() + " " +
+               "color : " + color.name() + " " +
                "}";
     }
 }
