@@ -1,11 +1,8 @@
 package ru.nsu.fit.g14203.net.util;
 
-import java.io.IOException;
-
-class MessageFormatException extends IOException {
+class MessageFormatException extends RuntimeException {
 
     MessageFormatException() {
-
     }
 
     MessageFormatException(Throwable cause) {

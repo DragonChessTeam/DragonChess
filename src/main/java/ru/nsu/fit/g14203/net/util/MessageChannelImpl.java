@@ -58,8 +58,13 @@ public class MessageChannelImpl implements MessageChannel {
     }
 
     @Override
-    public void send(@NotNull Message message) throws JsonProcessingException {
-        final byte[] bytes = mapper.writeValueAsBytes(message);
+    public void send(@NotNull Message message) {
+        final byte[] bytes;
+        try {
+            bytes = mapper.writeValueAsBytes(message);
+        } catch (JsonProcessingException e) {
+            throw new MessageFormatException();
+        }
         sendQueue.add(ByteBuffer.wrap(bytes));
 
         LOG.info("send message : " + message);
@@ -148,18 +153,19 @@ public class MessageChannelImpl implements MessageChannel {
         }
 
         Class<? extends Message> messageClass;
-        switch (type) {
+        switch (type) { //  FIXME: replace with special class
             case Message.TYPE_CONNECT:
                 messageClass = ConnectMessage.class;
                 break;
             case Message.TYPE_ACCEPT:
                 messageClass = AcceptMessage.class;
                 break;
-            case Message.TYPE_UPDATE:
-                messageClass = UpdateMessage.class;
-                break;
             case Message.TYPE_DISCONNECT:
                 messageClass = DisconnectMessage.class;
+                break;
+            case Message.TYPE_MOVE:
+            case Message.TYPE_CAPTURE:
+                messageClass = StepMessage.class;
                 break;
             default:
                 throw new MessageFormatException();
