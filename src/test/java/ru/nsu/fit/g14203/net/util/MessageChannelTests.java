@@ -107,6 +107,9 @@ public class MessageChannelTests {
         final boolean remove = messageChannel.removeReceiver(receiver);
 //        ------   test end   ------
 
+        assertThat(add, is(true));
+        assertThat(remove, is(true));
+
         final ArgumentCaptor<Integer> captor = ArgumentCaptor.forClass(Integer.class);
         verify(key, times(2)).interestOps(captor.capture());
         assertThat(captor.getAllValues().get(0), is(SelectionKey.OP_READ));

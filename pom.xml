@@ -4,9 +4,17 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>ru.nsu.fit.g14203</groupId>
-    <artifactId>DragonChess</artifactId>
+    <artifactId>D2-Chess</artifactId>
     <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>1.8</java.version>
+        <sonar.host.url>http://84.237.50.237:8083</sonar.host.url>
+        <sonar.projectKey>d2-chess</sonar.projectKey>
+        <sonar.sources>src/main/java</sonar.sources>
+    </properties>
 
     <dependencies>
         <dependency>
@@ -52,6 +60,25 @@
     <build>
         <finalName>${project.artifactId}</finalName>
         <plugins>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <!--<argLine>@{argLine}</argLine>-->
+                    <includes>
+                        <include>**/*Test.java</include>
+                        <include>**/*Tests.java</include>
+                    </includes>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>3.4.0.905</version>
+            </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
