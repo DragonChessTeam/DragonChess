@@ -1,12 +1,14 @@
-package ru.nsu.fit.g14203.net.util;
+package ru.nsu.fit.g14203.net.channel;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.stubbing.Answer;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -16,8 +18,13 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.powermock.api.mockito.PowerMockito.doNothing;
+import static org.powermock.api.mockito.PowerMockito.when;
 
+@RunWith(PowerMockRunner.class)
+@PrepareForTest({ SelectableByteChannel.class, MessageChannelImpl.class })
 public class MessageChannelTests {
 
     @Mock
@@ -33,8 +40,6 @@ public class MessageChannelTests {
 
     @Before
     public void prepare() throws IOException {
-        MockitoAnnotations.initMocks(this);
-
         when(key.channel())
                 .thenReturn(channel);
         when(key.interestOps(anyInt()))
@@ -42,6 +47,8 @@ public class MessageChannelTests {
         when(key.interestOps())
                 .thenReturn(0)
                 .thenReturn(SelectionKey.OP_READ | SelectionKey.OP_WRITE);
+
+        doNothing().when(channel).close();
     }
 
     @Test
@@ -129,5 +136,15 @@ public class MessageChannelTests {
 
             return ret;
         };
+    }
+
+    @Test
+    public void closeTest() throws IOException {
+        final MessageChannelImpl messageChannel = new MessageChannelImpl(key);
+        messageChannel.addReceiver(receiver);
+        messageChannel.close();
+
+        verify(channel).close();
+        verify(receiver).receive(any(DisconnectMessage.class));
     }
 }

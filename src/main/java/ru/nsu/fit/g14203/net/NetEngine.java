@@ -5,7 +5,12 @@ import ru.nsu.fit.g14203.engine.api.Observer;
 import ru.nsu.fit.g14203.engine.api.utils.Color;
 import ru.nsu.fit.g14203.engine.api.utils.EngineResponse;
 import ru.nsu.fit.g14203.engine.api.utils.Way;
-import ru.nsu.fit.g14203.net.util.*;
+import ru.nsu.fit.g14203.net.game.GameThread;
+import ru.nsu.fit.g14203.net.game.GameThreadFactory;
+import ru.nsu.fit.g14203.net.channel.DisconnectMessage;
+import ru.nsu.fit.g14203.net.channel.Message;
+import ru.nsu.fit.g14203.net.channel.MessageReceiver;
+import ru.nsu.fit.g14203.net.channel.StepMessage;
 
 import java.io.IOException;
 import java.net.SocketAddress;
@@ -13,10 +18,8 @@ import java.util.function.Consumer;
 
 public class NetEngine implements Engine, MessageReceiver {
 
-    public enum Type {
-        SERVER,
-        CLIENT
-    }
+    public static final int TYPE_SERVER = GameThreadFactory.TYPE_SERVER;
+    public static final int TYPE_CLIENT = GameThreadFactory.TYPE_CLIENT;
 
     private final Engine engine;
     private final GameThread thread;
@@ -31,26 +34,14 @@ public class NetEngine implements Engine, MessageReceiver {
      * @param disconnectHandler method to be called after opponent disconnect
      * @throws IOException if some IO errors with sockets occurs during initialisation
      */
-    public NetEngine(Type type, SocketAddress address, Engine engine,
+    public NetEngine(int type, SocketAddress address, Engine engine,
                      Consumer<Color> connectHandler, Runnable disconnectHandler)
             throws IOException {
         this.engine = engine;
 
-        final Consumer<Color> __connect = color -> {
-            subscribe();
-            connectHandler.accept(color);
-        };
-
-        if (type == Type.SERVER)
-            thread = new ServerThread(address, __connect, disconnectHandler);
-        else
-            thread = new ClientThread(address, __connect, disconnectHandler);
-
+        thread = GameThreadFactory.createGame(type, address,
+                connectHandler, disconnectHandler, this);
         thread.start();
-    }
-
-    private void subscribe() {
-        thread.getMessageChannel().addReceiver(this);
     }
 
     @Override
@@ -91,9 +82,9 @@ public class NetEngine implements Engine, MessageReceiver {
         if (message instanceof StepMessage) {
             final StepMessage step = (StepMessage) message;
             if (step.getType() == Message.TYPE_CAPTURE)
-                doCapture(step.getColor(), step.getWay());
+                engine.doCapture(step.getColor(), step.getWay());
             else
-                doMove(step.getColor(), step.getWay());
+                engine.doMove(step.getColor(), step.getWay());
         }
     }
 }

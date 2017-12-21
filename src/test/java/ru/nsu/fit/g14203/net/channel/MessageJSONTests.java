@@ -1,4 +1,4 @@
-package ru.nsu.fit.g14203.net.util;
+package ru.nsu.fit.g14203.net.channel;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;

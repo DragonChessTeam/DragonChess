@@ -1,8 +1,8 @@
-package ru.nsu.fit.g14203.net;
+package ru.nsu.fit.g14203.net.game;
 
 import org.apache.log4j.Logger;
 import ru.nsu.fit.g14203.engine.api.utils.Color;
-import ru.nsu.fit.g14203.net.util.*;
+import ru.nsu.fit.g14203.net.channel.*;
 
 import java.io.IOException;
 import java.net.SocketAddress;
@@ -10,20 +10,18 @@ import java.nio.channels.SelectionKey;
 import java.nio.channels.SocketChannel;
 import java.util.function.Consumer;
 
-class ClientThread extends GameThread {
+class ClientThread extends AbstractGameThread {
 
     private static final Logger LOG = Logger.getLogger(ClientThread.class);
-
-    private final SelectionKey key;
-    private final MessageChannelImpl messageChannel;
 
     private final boolean connected;
 
     private final MessageReceiver acceptReceiver = this::accept;
 
     ClientThread(SocketAddress address,
-                 Consumer<Color> connectHandler, Runnable disconnectHandler) throws IOException {
-        super(connectHandler, disconnectHandler);
+                 Consumer<Color> connectHandler, Runnable disconnectHandler,
+                 MessageReceiver receiver) throws IOException {
+        super(connectHandler, disconnectHandler, receiver);
 
         final SocketChannel channel = SocketChannel.open();
         channel.configureBlocking(false);
@@ -34,42 +32,15 @@ class ClientThread extends GameThread {
     }
 
     @Override
-    MessageChannel getMessageChannel() {
-        return messageChannel;
+    void beforeLoop() throws IOException {
+        if (connected)
+            connect();
     }
 
     @Override
-    public void run() {
-        if (connected)
+    void insideLoop() throws IOException {
+        if (key.isConnectable())
             connect();
-
-        try {
-            networkLoop();
-        } catch (IOException e) {
-            LOG.warn(e);
-        } finally {
-            LOG.info("disconnect");
-            disconnectHandler.run();
-        }
-    }
-
-    private void networkLoop() throws IOException {
-        while (!interrupted()) {
-            try {
-                selector.select();
-
-                if (key.isConnectable())
-                    connect();
-                if (key.isWritable())
-                    messageChannel.writeChannel();
-                if (key.isReadable())
-                    messageChannel.readChannel();
-
-                selector.selectedKeys().remove(key);
-            } catch (IOException e) {
-                messageChannel.close();
-            }
-        }
     }
 
     private void connect() {

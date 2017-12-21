@@ -1,4 +1,4 @@
-package ru.nsu.fit.g14203.net.util;
+package ru.nsu.fit.g14203.net.channel;
 
 public class ConnectMessage extends Message {
 

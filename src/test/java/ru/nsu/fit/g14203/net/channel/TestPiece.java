@@ -1,4 +1,4 @@
-package ru.nsu.fit.g14203.net.util;
+package ru.nsu.fit.g14203.net.channel;
 
 import ru.nsu.fit.g14203.engine.api.Piece;
 import ru.nsu.fit.g14203.engine.api.utils.Color;

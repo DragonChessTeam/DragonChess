@@ -1,9 +1,8 @@
-package ru.nsu.fit.g14203.net.util;
+package ru.nsu.fit.g14203.net.channel;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.io.Closeable;
-import java.io.IOException;
 
 /**
  * Provides event-based interface over ByteChannel.
