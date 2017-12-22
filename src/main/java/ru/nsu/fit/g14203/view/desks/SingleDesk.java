@@ -28,6 +28,7 @@ public class SingleDesk implements ChessDesk{
     @Override
     public void addPiece(int i, int j, Piece piece){
         boardModel.addPiece(i, j, piece);
+        
     }
 
     @Override
