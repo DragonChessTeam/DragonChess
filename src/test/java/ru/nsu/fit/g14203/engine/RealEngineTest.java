@@ -1,7 +1,7 @@
 package ru.nsu.fit.g14203.engine;
 
 import org.junit.Test;
-import ru.nsu.fit.g14203.engine.Initializer.TestEngineInitializer;
+import ru.nsu.fit.g14203.engine.initializer.TestEngineInitializer;
 import ru.nsu.fit.g14203.engine.api.utils.Dot3D;
 import ru.nsu.fit.g14203.engine.api.utils.EngineResponse;
 import ru.nsu.fit.g14203.engine.api.utils.Way;

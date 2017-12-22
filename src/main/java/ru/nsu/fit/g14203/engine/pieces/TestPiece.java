@@ -4,9 +4,9 @@ import ru.nsu.fit.g14203.engine.api.Piece;
 import ru.nsu.fit.g14203.engine.api.utils.Color;
 import ru.nsu.fit.g14203.engine.api.utils.Dot3D;
 import ru.nsu.fit.g14203.engine.constraints.*;
-import ru.nsu.fit.g14203.engine.moveLanguage.Or;
-import ru.nsu.fit.g14203.engine.moveLanguage.moves.RoundMove;
-import ru.nsu.fit.g14203.engine.moveLanguage.moves.StepMove;
+import ru.nsu.fit.g14203.engine.movelanguage.Or;
+import ru.nsu.fit.g14203.engine.movelanguage.moves.RoundMove;
+import ru.nsu.fit.g14203.engine.movelanguage.moves.StepMove;
 
 import java.util.List;
 

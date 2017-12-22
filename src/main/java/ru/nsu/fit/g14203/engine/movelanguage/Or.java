@@ -1,4 +1,4 @@
-package ru.nsu.fit.g14203.engine.moveLanguage;
+package ru.nsu.fit.g14203.engine.movelanguage;
 
 import ru.nsu.fit.g14203.engine.api.Piece;
 import ru.nsu.fit.g14203.engine.api.utils.Dot3D;

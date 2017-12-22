@@ -1,4 +1,4 @@
-package ru.nsu.fit.g14203.engine.Initializer;
+package ru.nsu.fit.g14203.engine.initializer;
 
 import ru.nsu.fit.g14203.engine.api.Piece;
 

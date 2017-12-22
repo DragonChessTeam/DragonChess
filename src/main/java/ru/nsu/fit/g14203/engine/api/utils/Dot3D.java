@@ -43,12 +43,11 @@ public class Dot3D {
 
 
 
-    public static Dot3D UP = new Dot3D(0,0,1);
-    public static Dot3D DOWN = new Dot3D(0,0,-1);
-    public static Dot3D LEFT = new Dot3D(-1,0,0);
-    public static Dot3D RIGHT = new Dot3D(1,0,0);
-    public static Dot3D FORWARD = new Dot3D(0,1,0);
-    public static Dot3D BACKWARD = new Dot3D(0,-1,0);
-    public static Dot3D NONE = new Dot3D(0,0,0);
-
+    public static final Dot3D UP = new Dot3D(0,0,1);
+    public static final Dot3D DOWN = new Dot3D(0,0,-1);
+    public static final Dot3D LEFT = new Dot3D(-1,0,0);
+    public static final Dot3D RIGHT = new Dot3D(1,0,0);
+    public static final Dot3D FORWARD = new Dot3D(0,1,0);
+    public static final Dot3D BACKWARD = new Dot3D(0,-1,0);
+    public static final Dot3D NONE = new Dot3D(0,0,0);
 }

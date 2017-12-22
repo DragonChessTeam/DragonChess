@@ -11,8 +11,4 @@ public class Immobilized implements Constraint{
         ends.clear();
     }
 
-    @Override
-    public void changeCapture(List<Dot3D> ends, Dot3D start, Piece[][][] boards) {
-        ends.clear();
-    }
 }

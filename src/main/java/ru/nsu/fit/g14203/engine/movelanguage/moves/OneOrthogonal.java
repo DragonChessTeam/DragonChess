@@ -1,18 +1,16 @@
-package ru.nsu.fit.g14203.engine.moveLanguage.moves;
+package ru.nsu.fit.g14203.engine.movelanguage.moves;
 
 import ru.nsu.fit.g14203.engine.api.Piece;
 import ru.nsu.fit.g14203.engine.api.utils.Dot3D;
-import ru.nsu.fit.g14203.engine.moveLanguage.BasicMove;
-import ru.nsu.fit.g14203.engine.moveLanguage.Move;
-import ru.nsu.fit.g14203.engine.moveLanguage.Or;
-import ru.nsu.fit.g14203.engine.pieces.BasicPiece;
+import ru.nsu.fit.g14203.engine.movelanguage.BasicMove;
+import ru.nsu.fit.g14203.engine.movelanguage.Move;
+import ru.nsu.fit.g14203.engine.movelanguage.Or;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static ru.nsu.fit.g14203.engine.api.utils.Dot3D.*;
 import static ru.nsu.fit.g14203.engine.api.utils.Dot3D.BACKWARD;
-import static ru.nsu.fit.g14203.engine.api.utils.Dot3D.NONE;
 
 public class OneOrthogonal extends BasicMove {
 

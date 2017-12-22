@@ -22,8 +22,4 @@ public class BlockConstraint implements Constraint {
         ends.addAll(out);
     }
 
-    @Override
-    public void changeCapture(List<Dot3D> ends, Dot3D start, Piece[][][] boards) {
-
-    }
 }

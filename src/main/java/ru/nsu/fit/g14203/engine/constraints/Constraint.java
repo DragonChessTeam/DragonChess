@@ -7,5 +7,4 @@ import java.util.List;
 
 public interface Constraint {
     void changeMove(List<Dot3D> ends, Dot3D start, Piece[][][] boards);
-    void changeCapture(List<Dot3D> ends, Dot3D start, Piece[][][] boards);
 }

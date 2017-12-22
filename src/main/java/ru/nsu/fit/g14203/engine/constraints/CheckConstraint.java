@@ -20,14 +20,4 @@ public class CheckConstraint implements Constraint{
         ends.addAll(out);
     }
 
-    @Override
-    public void changeCapture(List<Dot3D> ends, Dot3D start, Piece[][][] boards) {
-        List<Dot3D> out = new ArrayList<>();
-        for (Dot3D end : ends) {
-            if (!ChessChecker.isCheckAfterTurn(new Way(start, end), boards[start.x][start.y][start.z].getColor(), boards))
-                out.add(end);
-        }
-        ends.clear();
-        ends.addAll(out);
-    }
 }

@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ConstraintFormer {
+    private ConstraintFormer(){}
+
     public static Constraint[] formMoveConstraint(Constraint... additionConstrs){
         List<Constraint> out = new ArrayList<>();
         out.add(new BoardBorderConstraint());

@@ -3,7 +3,7 @@ package ru.nsu.fit.g14203.engine.pieces;
 import ru.nsu.fit.g14203.engine.api.Piece;
 import ru.nsu.fit.g14203.engine.api.utils.Color;
 import ru.nsu.fit.g14203.engine.api.utils.Dot3D;
-import ru.nsu.fit.g14203.engine.moveLanguage.Move;
+import ru.nsu.fit.g14203.engine.movelanguage.Move;
 
 import java.util.*;
 

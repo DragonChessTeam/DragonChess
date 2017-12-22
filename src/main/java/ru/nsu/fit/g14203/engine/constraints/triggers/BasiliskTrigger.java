@@ -7,7 +7,6 @@ import ru.nsu.fit.g14203.engine.api.utils.Color;
 import ru.nsu.fit.g14203.engine.api.utils.Dot3D;
 import ru.nsu.fit.g14203.engine.constraints.Constraint;
 import ru.nsu.fit.g14203.engine.constraints.Immobilized;
-import ru.nsu.fit.g14203.engine.pieces.Dwarf;
 
 import java.util.ArrayList;
 import java.util.List;

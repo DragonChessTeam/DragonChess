@@ -1,10 +1,11 @@
 package ru.nsu.fit.g14203.engine;
 
-import ru.nsu.fit.g14203.engine.Initializer.EngineInitializer;
+import ru.nsu.fit.g14203.engine.initializer.EngineInitializer;
 import ru.nsu.fit.g14203.engine.api.Engine;
 import ru.nsu.fit.g14203.engine.api.Observer;
 import ru.nsu.fit.g14203.engine.api.Piece;
 import ru.nsu.fit.g14203.engine.api.utils.*;
+import ru.nsu.fit.g14203.engine.constraints.triggers.BasiliskTrigger;
 import ru.nsu.fit.g14203.engine.constraints.triggers.Trigger;
 import ru.nsu.fit.g14203.engine.utils.ChessChecker;
 
@@ -27,7 +28,7 @@ public class RealEngine implements Engine {
 
     public RealEngine(EngineInitializer init) {
         init.init(boards);
-//        triggers.add(new BasiliskTrigger());
+        triggers.add(new BasiliskTrigger());
     }
 
     private EngineResponse shiftPiece(Dot3D start, Dot3D end, boolean isCapture, Piece[][][] boards) {
@@ -85,6 +86,8 @@ public class RealEngine implements Engine {
                 break;
             case BLACK_TURN:
                 state = WHITE_TURN;
+                break;
+            default:
                 break;
         }
 

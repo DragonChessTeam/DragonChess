@@ -2,12 +2,11 @@ package ru.nsu.fit.g14203.engine.pieces;
 
 import ru.nsu.fit.g14203.engine.api.utils.Color;
 import ru.nsu.fit.g14203.engine.constraints.StartLevelConstraint;
-import ru.nsu.fit.g14203.engine.moveLanguage.Follow;
-import ru.nsu.fit.g14203.engine.moveLanguage.Is;
-import ru.nsu.fit.g14203.engine.moveLanguage.Or;
-import ru.nsu.fit.g14203.engine.moveLanguage.UpTo;
-import ru.nsu.fit.g14203.engine.moveLanguage.moves.RoundMove;
-import ru.nsu.fit.g14203.engine.moveLanguage.moves.StepMove;
+import ru.nsu.fit.g14203.engine.movelanguage.Follow;
+import ru.nsu.fit.g14203.engine.movelanguage.Is;
+import ru.nsu.fit.g14203.engine.movelanguage.Or;
+import ru.nsu.fit.g14203.engine.movelanguage.moves.RoundMove;
+import ru.nsu.fit.g14203.engine.movelanguage.moves.StepMove;
 
 import static ru.nsu.fit.g14203.engine.api.utils.Dot3D.*;
 import static ru.nsu.fit.g14203.engine.constraints.ConstraintFormer.formMoveConstraint;

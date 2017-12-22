@@ -11,6 +11,8 @@ import java.util.List;
 
 public class ChessChecker {
 
+    private ChessChecker() {}
+
     public static boolean isCheckAfterTurn(Way move, Color side, Piece[][][] pg) {
 
         Piece savedPiece = pg[move.end.x][move.end.y][move.end.z];
@@ -23,6 +25,20 @@ public class ChessChecker {
         return result;
     }
 
+    private static boolean isKingInRange(Piece[][][] boards, Piece piece, Color side, Dot3D piecePos, Dot3D kingPos) {
+        if (piece != null && piece.getColor() != side){
+            piece.getCaptureAlg().removeConstraint(CheckConstraint.class);
+            List<Dot3D> ends =  piece.getAvailableCaptures(piecePos, boards);
+            piece.getCaptureAlg().addConstraint(new CheckConstraint());
+
+            for (Dot3D otherFigureEnd : ends) {
+                if (otherFigureEnd.equals(kingPos)) return true;
+            }
+        }
+
+        return false;
+    }
+
     public static boolean isCheckFor(Color side, Piece[][][] pg) {
 
         //Find our king
@@ -33,15 +49,7 @@ public class ChessChecker {
         for (int x = 0; x < pg.length; x++)
             for(int y = 0; y < pg[0].length; y++)
                 for (int z = 0; z < pg[0][0].length; z++)
-                    if (pg[x][y][z] != null && pg[x][y][z].getColor() != side){
-                        pg[x][y][z].getCaptureAlg().removeConstraint(CheckConstraint.class);
-                        List<Dot3D> ends = pg[x][y][z].getAvailableCaptures(new Dot3D(x,y,z), pg);
-                        pg[x][y][z].getCaptureAlg().addConstraint(new CheckConstraint());
-
-                        for (Dot3D otherFigureEnd : ends) {
-                            if (otherFigureEnd.equals(kingPos)) return true;
-                        }
-                    }
+                    if (isKingInRange(pg, pg[x][y][z], side, new Dot3D(x,y,z), kingPos)) return true;
 
         return false;
     }

@@ -25,8 +25,4 @@ public class StartLevelConstraint implements Constraint {
         ends.clear();
     }
 
-    @Override
-    public void changeCapture(List<Dot3D> ends, Dot3D start, Piece[][][] boards) {
-        changeMove(ends,start, boards);
-    }
 }
