@@ -10,7 +10,7 @@ public class BoardModel {
 
 
     BoardModel(){
-        board = new Piece[8][14];
+        board = new Piece[8][12];
     }
 
     public Piece getPiece(int i, int j){

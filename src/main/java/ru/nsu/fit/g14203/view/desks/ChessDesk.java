@@ -25,5 +25,11 @@ public interface ChessDesk {
 
     void clearChosenField();
 
+    Piece[][] getBoardModel();
+
+    void setReleasedField(Dimension dimension, Color color);
+
+    void clearReleasedField();
+
 
 }

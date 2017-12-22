@@ -13,10 +13,8 @@ public class BoardImage {
 
     private BufferedImage originalImage;
     private BufferedImage pressedImage;
-    private int k;
 
     public BoardImage(String path, int initalWidth, int initalHeight){
-        k = 0;
         try {
             originalImage = ImageIO.read(new File(path));
         } catch (IOException e) {
@@ -54,31 +52,34 @@ public class BoardImage {
 
     }
 
-    public BufferedImage getImage(int windowWidth, int windowHeight, Piece[][] boardModel, Dimension choosenField){ //add piece drawing
+    public BufferedImage getImage(int windowWidth, int windowHeight, Piece[][] boardModel, Dimension choosenField, Dimension releasedField, Color releasedColor){ //add piece drawing
 
         scale(windowWidth, windowHeight);
 
         for(int i = 0; i < boardModel.length; i++){
             for(int j = 0; j < boardModel[0].length; j++){
                 if(boardModel[i][j] != null){
-                    drawPiece(i, j, "asd", boardModel[i][j].getColor()); //TODO: change piece color
+                    drawPiece(i, j, boardModel[i][j].getName(), boardModel[i][j].getColor());
                 }
             }
         }
         if(choosenField != null){
-            drawChosenField(choosenField);
+            drawChosenField(choosenField, Color.BLUE);
+        }
+        if(releasedField != null){
+            drawChosenField(releasedField, releasedColor);
         }
 
         return pressedImage;
     }
 
-    private void drawChosenField(Dimension choosenField){
+    private void drawChosenField(Dimension choosenField, Color color){
         int xShift, yShift;
         xShift = pressedImage.getWidth() / 12;
         yShift = pressedImage.getHeight() / 8;
         Graphics g = pressedImage.getGraphics();
         Graphics2D g2d = (Graphics2D)g;
-        g2d.setColor(Color.BLUE);
+        g2d.setColor(color);
         g2d.setStroke(new BasicStroke(3));
         g2d.drawRect(xShift * choosenField.width, yShift * choosenField.height, xShift, yShift);
 

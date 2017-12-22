@@ -11,6 +11,8 @@ public class SingleDesk implements ChessDesk{
     private BoardImage boardImage;
     private BoardModel boardModel;
     private Dimension chosenField;
+    private Dimension releasedField;
+    private Color releasedColor;
 
 
     public SingleDesk(String path, int initalWidth, int initalHeight){
@@ -21,7 +23,7 @@ public class SingleDesk implements ChessDesk{
     @Override
     public BufferedImage getDeskImage(int windowWidth, int windowHeight) { //add drawing pieces
 
-        return boardImage.getImage(windowWidth, windowHeight, boardModel.getBoard(), chosenField);
+        return boardImage.getImage(windowWidth, windowHeight, boardModel.getBoard(), chosenField, releasedField, releasedColor);
     }
 
     @Override
@@ -64,7 +66,23 @@ public class SingleDesk implements ChessDesk{
     }
 
     @Override
+    public void setReleasedField(Dimension dimension, Color color){
+        this.releasedField = dimension;
+        releasedColor = color;
+    }
+
+    @Override
+    public void clearReleasedField(){
+        releasedField = null;
+    }
+
+    @Override
     public void clearChosenField(){
         chosenField = null;
+    }
+
+    @Override
+    public Piece[][] getBoardModel(){
+        return boardModel.getBoard();
     }
 }

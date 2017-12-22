@@ -21,7 +21,7 @@ public class BasicPiece implements Piece {
 
     @Override
     public String getName() {
-        return this.getClass().getName().substring(0,3);
+        return this.getClass().getSimpleName().substring(0,3);
     }
 
     @Override

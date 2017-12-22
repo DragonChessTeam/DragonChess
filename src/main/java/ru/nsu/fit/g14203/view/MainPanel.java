@@ -1,9 +1,11 @@
 package ru.nsu.fit.g14203.view;
 
+import ru.nsu.fit.g14203.engine.RealEngine;
 import ru.nsu.fit.g14203.engine.api.Engine;
 import ru.nsu.fit.g14203.engine.api.Observer;
 import ru.nsu.fit.g14203.engine.api.utils.Dot3D;
 import ru.nsu.fit.g14203.engine.api.utils.UpdateEntry;
+import ru.nsu.fit.g14203.engine.initializer.NormalEngineInitializer;
 import ru.nsu.fit.g14203.view.desks.SingleDesk;
 
 import javax.swing.*;
@@ -27,6 +29,8 @@ public class MainPanel extends JPanel implements Observer{
         setFocusable(true);
         requestFocusInWindow();
 
+
+
         deskSwiper = new DeskSwiper(new SingleDesk("resources/redboard.jpg", 600, 400),
                 new SingleDesk("resources/greenboard.jpg", 600, 400),
                 new SingleDesk("resources/blueboard.jpg", 600, 400));
@@ -34,7 +38,6 @@ public class MainPanel extends JPanel implements Observer{
         addKeyListener(new KeyAdapter() {
 
             public void keyPressed(KeyEvent e) {
-
                 switch (e.getKeyCode()){
                     case KeyEvent.VK_RIGHT: //rightSwipe();
                         deskSwiper.incrementIndex();
@@ -58,6 +61,19 @@ public class MainPanel extends JPanel implements Observer{
             }
         });
 
+        addMouseMotionListener(new MouseAdapter() {
+            @Override
+            public void mouseMoved(MouseEvent e) {
+                super.mouseMoved(e);
+                deskSwiper.handleMove(e.getX(), e.getY());
+                repaint();
+            }
+        });
+
+
+        engine = new RealEngine(new NormalEngineInitializer());
+        engine.registerObserver(this);
+
     }
 
     protected void paintComponent(Graphics g) {
@@ -79,8 +95,9 @@ public class MainPanel extends JPanel implements Observer{
                 deskSwiper.getDesk(firstDot.z).addPiece(firstDot.y, firstDot.x, s.pieceToPlace);
             }
             if(s.pieceToPlace == null && s.fullPath.size() > 1){ //движение
+                deskSwiper.getDesk(lastDot.z).addPiece(lastDot.y, lastDot.x, deskSwiper.getDesk(firstDot.z).getPiece(new Dimension(firstDot.x, firstDot.y)));
                 deskSwiper.getDesk(firstDot.z).deletePiece(firstDot.y, firstDot.x);
-                deskSwiper.getDesk(lastDot.z).addPiece(lastDot.y, lastDot.x, s.pieceToPlace);
+
             }
         });
         repaint();
