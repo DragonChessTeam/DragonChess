@@ -1,6 +1,7 @@
 package ru.nsu.fit.g14203.view.desks;
 
 import ru.nsu.fit.g14203.engine.api.Piece;
+import ru.nsu.fit.g14203.view.TestPiece;
 
 import java.util.List;
 
@@ -11,9 +12,8 @@ public class BoardModel {
 
 
 
-    public BoardModel(){
+    BoardModel(){
         board = new Piece[8][14];
-
     }
 
     public Piece getPiece(int i, int j){

@@ -1,6 +1,7 @@
 package ru.nsu.fit.g14203.view.desks;
 
 import ru.nsu.fit.g14203.engine.api.Piece;
+import ru.nsu.fit.g14203.engine.api.utils.Dot3D;
 import ru.nsu.fit.g14203.view.BoardImage;
 
 import java.awt.*;
@@ -10,6 +11,8 @@ public class SingleDesk implements ChessDesk{
 
     private BoardImage boardImage;
     private BoardModel boardModel;
+    private Dimension chosenField;
+
 
     public SingleDesk(String path, int initalWidth, int initalHeight){
         boardImage = new BoardImage(path,initalWidth, initalHeight);
@@ -19,7 +22,7 @@ public class SingleDesk implements ChessDesk{
     @Override
     public BufferedImage getDeskImage(int windowWidth, int windowHeight) { //add drawing pieces
 
-        return boardImage.getImage(windowWidth, windowHeight, boardModel.getBoard());
+        return boardImage.getImage(windowWidth, windowHeight, boardModel.getBoard(), chosenField);
     }
 
     @Override
@@ -44,6 +47,25 @@ public class SingleDesk implements ChessDesk{
     }
 
     @Override
-    public void drawPiece(int i, int j) {
+    public Dimension getBoardModelPosition(int x, int y){
+        if(boardImage.isOnBoard(x,y)){
+            return boardImage.getBoardCoordinations(x,y);
+            //System.out.print(test.height + " " + test.width);
+        }else return null;
+    }
+
+    @Override
+    public Piece getPiece(Dimension position){
+        return boardModel.getPiece(position.height, position.width);
+    }
+
+    @Override
+    public void setChosenField(Dimension dimension){
+        this.chosenField = dimension;
+    }
+
+    @Override
+    public void clearChosenField(){
+        chosenField = null;
     }
 }

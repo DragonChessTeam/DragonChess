@@ -21,7 +21,7 @@ public class InitMainWindow extends MainFrame {
 
     private InitMainWindow()
     {
-        super(windowWidth, windowHeight, "Init application");
+        super(windowWidth, windowHeight, "Dragonchess");
         mainPanel = new MainPanel();
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -36,8 +36,6 @@ public class InitMainWindow extends MainFrame {
             //addSubMenu("File", KeyEvent.VK_F);
             //addSubMenu("Edit", KeyEvent.VK_F);
 
-
-            //addMenuItem("File/Exit", "Exit application", KeyEvent.VK_X, "exit.png", "onExit");
 
 
         }

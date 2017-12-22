@@ -1,5 +1,6 @@
 package ru.nsu.fit.g14203.view;
 
+import ru.nsu.fit.g14203.engine.api.Engine;
 import ru.nsu.fit.g14203.engine.api.Observer;
 import ru.nsu.fit.g14203.engine.api.utils.Dot3D;
 import ru.nsu.fit.g14203.engine.api.utils.UpdateEntry;
@@ -9,12 +10,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 
 public class MainPanel extends JPanel implements Observer{
 
     private DeskSwiper deskSwiper;
     private static double sideShift = 0.1;
+    private Engine engine;
 
 
     public MainPanel(){
@@ -34,16 +38,23 @@ public class MainPanel extends JPanel implements Observer{
                 switch (e.getKeyCode()){
                     case KeyEvent.VK_RIGHT: //rightSwipe();
                         deskSwiper.incrementIndex();
-                        //deskSwiper.getDesk().drawPiece(1,1);
                         repaint();
                         break;
                     case KeyEvent.VK_LEFT: deskSwiper.decrementIndex();
-                        deskSwiper.getDesk().drawPiece(2,2);
                         repaint();
                         break;
                     default: break;
                 }
 
+            }
+        });
+
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                deskSwiper.handleClick(e.getX(), e.getY(), engine);
+                repaint();
             }
         });
 
@@ -57,6 +68,7 @@ public class MainPanel extends JPanel implements Observer{
 
     @Override
     public void update(List<UpdateEntry> boards) {
+        deskSwiper.clearChosenFields();
         boards.forEach(s -> {
             Dot3D firstDot = s.fullPath.get(0);
             Dot3D lastDot = s.fullPath.get(s.fullPath.size() - 1);
@@ -72,6 +84,10 @@ public class MainPanel extends JPanel implements Observer{
             }
         });
         repaint();
+    }
+
+    public void setEngine(Engine engine){
+        this.engine = engine;
     }
 
 /*    private void rightSwipe(){

@@ -5,6 +5,7 @@ import ru.nsu.fit.g14203.engine.api.Piece;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.geom.Dimension2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -27,7 +28,7 @@ public class BoardImage {
 
     }
 
-    public void scale(int windowWidth, int windowHeight){
+    private void scale(int windowWidth, int windowHeight){
 
         double scaleWidthCount = (double) windowWidth/ (double) originalImage.getWidth();
         double scaleHeightCount = (double) windowHeight/ (double) originalImage.getHeight();
@@ -54,33 +55,41 @@ public class BoardImage {
 
     }
 
-    public BufferedImage getImage(int windowWidth, int windowHeight, Piece[][] boardModel){ //add piece drawing
+    public BufferedImage getImage(int windowWidth, int windowHeight, Piece[][] boardModel, Dimension choosenField){ //add piece drawing
+
         scale(windowWidth, windowHeight);
 
         for(int i = 0; i < boardModel.length; i++){
             for(int j = 0; j < boardModel[0].length; j++){
                 if(boardModel[i][j] != null){
-                    drawPiece(i, j, "asd", boardModel[i][j].getColor());
+                    drawPiece(i, j, "asd", boardModel[i][j].getColor()); //TODO: change piece color
                 }
             }
         }
+        if(choosenField != null){
+            drawChosenField(choosenField);
+        }
 
-        /*Graphics g = pressedImage.createGraphics();
+        return pressedImage;
+    }
+
+    private void drawChosenField(Dimension choosenField){
         int xShift, yShift;
         xShift = pressedImage.getWidth() / 12;
         yShift = pressedImage.getHeight() / 8;
-        int xPosition = xShift * 1;
-        int yPosition = yShift * 2;
-        g.drawOval(xPosition , yPosition, yShift, xShift);
-        System.out.println(xPosition + xShift + " " + (yPosition + yShift/2));*/
-        return pressedImage;
+        Graphics g = pressedImage.getGraphics();
+        Graphics2D g2d = (Graphics2D)g;
+        g2d.setColor(Color.BLUE);
+        g2d.setStroke(new BasicStroke(3));
+        g2d.drawRect(xShift * choosenField.width, yShift * choosenField.height, xShift, yShift);
+
     }
 
     public BufferedImage getImage(){
         return pressedImage;
     }
 
-    public void drawPiece(int i, int j, String name, ru.nsu.fit.g14203.engine.api.utils.Color color){
+    private void drawPiece(int i, int j, String name, ru.nsu.fit.g14203.engine.api.utils.Color color){
 
         Graphics g = pressedImage.createGraphics();
 
@@ -101,6 +110,16 @@ public class BoardImage {
         else
             g.setColor(Color.BLACK);
         g.drawString(name, xPosition + xShift/4, yPosition + yShift/2);
+    }
+
+    public boolean isOnBoard(int x, int y){
+        return x < pressedImage.getWidth() && y < pressedImage.getHeight();
+    }
+
+    public Dimension getBoardCoordinations(int x, int y){
+        int xShift = pressedImage.getWidth() / 12;
+        int yShift = pressedImage.getHeight() / 8;
+        return new Dimension(x/xShift,y/yShift);
     }
 
 }
