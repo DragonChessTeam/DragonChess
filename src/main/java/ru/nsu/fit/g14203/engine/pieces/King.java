@@ -26,7 +26,12 @@ public class King extends BasicPiece {
                 new StepMove(DOWN),
                 new StepMove(UP)
         ).addConstraint(formMoveConstraint(new StartLevelConstraint(2)));
-        capture = new RoundMove().addConstraint(formCaptureConstraint(new StartLevelConstraint(2)));
+        capture = new Or(
+                new RoundMove(),
+                new StepMove(UP),
+                new StepMove(DOWN)
+        ).addConstraint(formCaptureConstraint(new StartLevelConstraint(2)));
+
     }
 
     @Override
