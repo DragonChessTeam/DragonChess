@@ -143,7 +143,9 @@ public class DeskSwiper {
     }
 
     private Piece[][][] craft3DimensionArray(){
-        Piece[][] firstDesk, secondDesk, thirdDesk;
+        Piece[][] firstDesk;
+        Piece[][] secondDesk;
+        Piece[][] thirdDesk;
         firstDesk = (getDesk(0).getBoardModel());
         secondDesk = (getDesk(1).getBoardModel());
         thirdDesk = (getDesk(2).getBoardModel());
@@ -156,21 +158,6 @@ public class DeskSwiper {
                 arr[i][j][2] = thirdDesk[j][i];
             }
         }
-        return arr;//new Piece[][][]{transpose(firstDesk), transpose(secondDesk), transpose(thirdDesk)};
-    }
-
-    private Piece[][] transpose(Piece[][] piece){
-
-        int width = piece.length;
-        int height = piece[0].length;
-
-        Piece[][] array_new = new Piece[height][width];
-
-        for (int x = 0; x < width; x++) {
-            for (int y = 0; y < height; y++) {
-                array_new[y][x] = piece[x][y];
-            }
-        }
-        return array_new;
+        return arr;
     }
 }

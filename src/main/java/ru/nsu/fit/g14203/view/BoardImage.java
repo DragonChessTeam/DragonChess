@@ -74,7 +74,8 @@ public class BoardImage {
     }
 
     private void drawChosenField(Dimension choosenField, Color color){
-        int xShift, yShift;
+        int xShift;
+        int yShift;
         xShift = pressedImage.getWidth() / 12;
         yShift = pressedImage.getHeight() / 8;
         Graphics g = pressedImage.getGraphics();
@@ -98,7 +99,8 @@ public class BoardImage {
         else
             g.setColor(Color.WHITE);
 
-        int xShift, yShift;
+        int xShift;
+        int yShift;
         xShift = pressedImage.getWidth() / 12;
         yShift = pressedImage.getHeight() / 8;
         int xPosition = xShift * j;

@@ -1,9 +1,13 @@
 package ru.nsu.fit.g14203.view;
 
+import ru.nsu.fit.g14203.engine.api.Engine;
 import ru.nsu.fit.g14203.view.utils.MainFrame;
 
 import javax.swing.*;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /**
  * Main window class
@@ -19,20 +23,20 @@ public class InitMainWindow extends MainFrame {
     private static int windowHeight = 600;
     private MainPanel mainPanel;
 
-    private InitMainWindow()
+    public InitMainWindow(Engine engine)
     {
         super(windowWidth, windowHeight, "Dragonchess");
-        mainPanel = new MainPanel();
+        mainPanel = new MainPanel(engine);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         add(mainPanel);
-
+        setVisible(true);
 
         try
         {
-            /*addSubMenu("Game", KeyEvent.VK_G);
-            addMenuItem("Game/Connect", "Connect", KeyEvent.VK_C, null, "onConnect");
-            addToolBarButton("Game/Connect");*/
+            //addSubMenu("Game", 0);
+            //addMenuItem("Game/Connect", "Connect", KeyEvent.VK_C, null, "onConnect");
+            //addToolBarButton("Game/Connect");
             //addSubMenu("Edit", KeyEvent.VK_F);
 
 
@@ -45,6 +49,10 @@ public class InitMainWindow extends MainFrame {
 
     }
 
+    public MainPanel getMainPanel() {
+        return mainPanel;
+    }
+
     public void onConnect() {
 
     }
@@ -53,14 +61,11 @@ public class InitMainWindow extends MainFrame {
     public void onExit(){
         System.exit(0);
     }
-
-    /**
-     * Application main entry point
-     * @param args command line arguments (unused)
-     */
+    
+     /*
     public static void main(String[] args)
     {
         InitMainWindow mainFrame = new InitMainWindow();
         mainFrame.setVisible(true);
-    }
+    }*/
 }

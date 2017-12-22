@@ -14,16 +14,16 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.EventListener;
 import java.util.List;
 
 public class MainPanel extends JPanel implements Observer{
 
     private DeskSwiper deskSwiper;
-    private static double sideShift = 0.1;
     private Engine engine;
 
 
-    public MainPanel(){
+    public MainPanel(Engine engine){
 
         setLayout(new BorderLayout());
         setFocusable(true);
@@ -71,9 +71,23 @@ public class MainPanel extends JPanel implements Observer{
         });
 
 
-        engine = new RealEngine(new NormalEngineInitializer());
-        engine.registerObserver(this);
+        this.engine = engine;
+        /*engine = new RealEngine(new NormalEngineInitializer());
+        engine.registerObserver(this);*/
 
+    }
+
+    public void onKeyPress(KeyEvent e){
+        switch (e.getKeyCode()){
+            case KeyEvent.VK_RIGHT: //rightSwipe();
+                deskSwiper.incrementIndex();
+                repaint();
+                break;
+            case KeyEvent.VK_LEFT: deskSwiper.decrementIndex();
+                repaint();
+                break;
+            default: break;
+        }
     }
 
     protected void paintComponent(Graphics g) {
