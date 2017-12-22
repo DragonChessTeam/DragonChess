@@ -2,6 +2,7 @@ package ru.nsu.fit.g14203.engine.pieces;
 
 
 import ru.nsu.fit.g14203.engine.api.utils.Color;
+import ru.nsu.fit.g14203.engine.constraints.CheckConstraint;
 import ru.nsu.fit.g14203.engine.constraints.StartLevelConstraint;
 import ru.nsu.fit.g14203.engine.movelanguage.Follow;
 import ru.nsu.fit.g14203.engine.movelanguage.Or;
@@ -28,7 +29,7 @@ public class Elemental extends BasicPiece {
                         new StepMove(RIGHT.sum(BACKWARD))
                 ).addConstraint(formMoveConstraint(new StartLevelConstraint(1))),
                 new Follow(new StepMove(DOWN), new OneOrthogonal()).addConstraint(formMoveConstraint(new StartLevelConstraint(2)))
-        );
+        ).addConstraint(new CheckConstraint());
 
         capture = new Or (
                 new Or(
@@ -39,7 +40,7 @@ public class Elemental extends BasicPiece {
                         new Follow(new OneOrthogonal(), new StepMove(UP)).addConstraint(formCaptureConstraint(new StartLevelConstraint(1)))
                 ),
                 new Follow(new StepMove(DOWN), new OneOrthogonal()).addConstraint(formCaptureConstraint(new StartLevelConstraint(2)))
-        );
+        ).addConstraint(new CheckConstraint());
 
     }
 }

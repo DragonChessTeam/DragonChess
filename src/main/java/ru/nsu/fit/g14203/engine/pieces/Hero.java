@@ -4,6 +4,7 @@ import ru.nsu.fit.g14203.engine.api.Piece;
 import ru.nsu.fit.g14203.engine.api.utils.Color;
 import ru.nsu.fit.g14203.engine.api.utils.Dot3D;
 import ru.nsu.fit.g14203.engine.constraints.BlockConstraint;
+import ru.nsu.fit.g14203.engine.constraints.CheckConstraint;
 import ru.nsu.fit.g14203.engine.constraints.StartLevelConstraint;
 import ru.nsu.fit.g14203.engine.movelanguage.Or;
 import ru.nsu.fit.g14203.engine.movelanguage.UpTo;
@@ -29,7 +30,7 @@ public class Hero extends BasicPiece {
                 new UpTo(2, new StepMove(RIGHT.sum(BACKWARD))).addConstraint(formMoveConstraint(new StartLevelConstraint(2))).removeConstraint(BlockConstraint.class),
                 new TriagonalMove(false).addConstraint(formMoveConstraint(new StartLevelConstraint(2))),
                 new TriagonalMove(true).addConstraint(formMoveConstraint(new StartLevelConstraint(2)))
-        );
+        ).addConstraint(new CheckConstraint());
 
         capture = new Or(
                 new UpTo(2, new StepMove(LEFT.sum(FORWARD))).addConstraint(formCaptureConstraint(new StartLevelConstraint(2))).removeConstraint(BlockConstraint.class),
@@ -38,7 +39,7 @@ public class Hero extends BasicPiece {
                 new UpTo(2, new StepMove(RIGHT.sum(BACKWARD))).addConstraint(formCaptureConstraint(new StartLevelConstraint(2))).removeConstraint(BlockConstraint.class),
                 new TriagonalMove(false).addConstraint(formCaptureConstraint(new StartLevelConstraint(2))),
                 new TriagonalMove(true).addConstraint(formCaptureConstraint(new StartLevelConstraint(2)))
-        );
+        ).addConstraint(new CheckConstraint());
     }
 
 

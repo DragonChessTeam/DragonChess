@@ -37,7 +37,7 @@ public class Sylph extends BasicPiece{
             capture = new Or(
                     new StepMove(FORWARD),
                     new StepMove(DOWN)
-            ).addConstraint(formCaptureConstraint(new StartLevelConstraint(3)));
+            ).addConstraint(formCaptureConstraint(new StartLevelConstraint(3))).addConstraint(new CheckConstraint());
         } else {
             move = new Or (
                     new Or(
@@ -53,12 +53,12 @@ public class Sylph extends BasicPiece{
                             new AbsoluteMove(new Dot3D(8, 1, 2)),
                             new AbsoluteMove(new Dot3D(10, 1, 2))
                     ).addConstraint(formMoveConstraint(new StartLevelConstraint(2)))
-            );
+            ).addConstraint(new CheckConstraint());
 
             capture = new Or(
                     new StepMove(BACKWARD),
                     new StepMove(DOWN)
-            ).addConstraint(formCaptureConstraint(new StartLevelConstraint(3)));
+            ).addConstraint(formCaptureConstraint(new StartLevelConstraint(3))).addConstraint(new CheckConstraint());
         }
 
     }

@@ -1,6 +1,7 @@
 package ru.nsu.fit.g14203.engine.pieces;
 
 import ru.nsu.fit.g14203.engine.api.utils.Color;
+import ru.nsu.fit.g14203.engine.constraints.CheckConstraint;
 import ru.nsu.fit.g14203.engine.constraints.StartLevelConstraint;
 import ru.nsu.fit.g14203.engine.movelanguage.Or;
 import ru.nsu.fit.g14203.engine.movelanguage.UpToBorder;
@@ -18,12 +19,12 @@ public class Thief extends BasicPiece {
                 new UpToBorder(new StepMove(LEFT.sum(BACKWARD))).addConstraint(formMoveConstraint(new StartLevelConstraint(2))),
                 new UpToBorder(new StepMove(RIGHT.sum(FORWARD))).addConstraint(formMoveConstraint(new StartLevelConstraint(2))),
                 new UpToBorder(new StepMove(RIGHT.sum(BACKWARD))).addConstraint(formMoveConstraint(new StartLevelConstraint(2)))
-        );
+        ).addConstraint(new CheckConstraint());
         capture = new Or(
                 new UpToBorder(new StepMove(LEFT.sum(FORWARD))).addConstraint(formCaptureConstraint(new StartLevelConstraint(2))),
                 new UpToBorder(new StepMove(LEFT.sum(BACKWARD))).addConstraint(formCaptureConstraint(new StartLevelConstraint(2))),
                 new UpToBorder(new StepMove(RIGHT.sum(FORWARD))).addConstraint(formCaptureConstraint(new StartLevelConstraint(2))),
                 new UpToBorder(new StepMove(RIGHT.sum(BACKWARD))).addConstraint(formCaptureConstraint(new StartLevelConstraint(2)))
-        );
+        ).addConstraint(new CheckConstraint());
     }
 }

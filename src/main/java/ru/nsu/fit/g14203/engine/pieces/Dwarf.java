@@ -1,6 +1,7 @@
 package ru.nsu.fit.g14203.engine.pieces;
 
 import ru.nsu.fit.g14203.engine.api.utils.Color;
+import ru.nsu.fit.g14203.engine.constraints.CheckConstraint;
 import ru.nsu.fit.g14203.engine.constraints.StartLevelConstraint;
 import ru.nsu.fit.g14203.engine.movelanguage.Or;
 import ru.nsu.fit.g14203.engine.movelanguage.moves.StepMove;
@@ -22,12 +23,12 @@ public class Dwarf extends BasicPiece{
                             new StepMove(LEFT)
                     ).addConstraint(formMoveConstraint(new StartLevelConstraint(1,2))),
                     new StepMove(DOWN).addConstraint(formMoveConstraint(new StartLevelConstraint(2)))
-            );
+            ).addConstraint(new CheckConstraint());
             capture = new Or (
                     new StepMove(LEFT.sum(FORWARD)),
                     new StepMove(RIGHT.sum(FORWARD)),
                     new StepMove(UP)
-            ).addConstraint(formCaptureConstraint(new StartLevelConstraint(1)));
+            ).addConstraint(formCaptureConstraint(new StartLevelConstraint(1))).addConstraint(new CheckConstraint());
         }
         else {
             move = new Or(
@@ -37,12 +38,12 @@ public class Dwarf extends BasicPiece{
                             new StepMove(LEFT)
                     ).addConstraint(formMoveConstraint(new StartLevelConstraint(1,2))),
                     new StepMove(DOWN).addConstraint(formMoveConstraint(new StartLevelConstraint(2)))
-            );
+            ).addConstraint(new CheckConstraint());
             capture = new Or (
                     new StepMove(LEFT.sum(BACKWARD)),
                     new StepMove(RIGHT.sum(BACKWARD)),
                     new StepMove(UP)
-            ).addConstraint(formCaptureConstraint(new StartLevelConstraint(1)));
+            ).addConstraint(formCaptureConstraint(new StartLevelConstraint(1))).addConstraint(new CheckConstraint());
         }
 
 

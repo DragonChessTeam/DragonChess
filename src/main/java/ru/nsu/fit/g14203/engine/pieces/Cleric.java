@@ -1,6 +1,7 @@
 package ru.nsu.fit.g14203.engine.pieces;
 
 import ru.nsu.fit.g14203.engine.api.utils.Color;
+import ru.nsu.fit.g14203.engine.constraints.CheckConstraint;
 import ru.nsu.fit.g14203.engine.movelanguage.Or;
 import ru.nsu.fit.g14203.engine.movelanguage.moves.RoundMove;
 import ru.nsu.fit.g14203.engine.movelanguage.moves.StepMove;
@@ -17,12 +18,12 @@ public class Cleric extends BasicPiece {
                 new RoundMove().addConstraint(formMoveConstraint()),
                 new StepMove(UP).addConstraint(formMoveConstraint()),
                 new StepMove(DOWN).addConstraint(formMoveConstraint())
-        );
+        ).addConstraint(new CheckConstraint());
         capture = new Or(
                 new RoundMove().addConstraint(formCaptureConstraint()),
                 new StepMove(UP).addConstraint(formCaptureConstraint()),
                 new StepMove(DOWN).addConstraint(formCaptureConstraint())
-        );
+        ).addConstraint(new CheckConstraint());
 
 
     }

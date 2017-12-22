@@ -1,6 +1,7 @@
 package ru.nsu.fit.g14203.engine.pieces;
 
 import ru.nsu.fit.g14203.engine.api.utils.Color;
+import ru.nsu.fit.g14203.engine.constraints.CheckConstraint;
 import ru.nsu.fit.g14203.engine.constraints.StartLevelConstraint;
 import ru.nsu.fit.g14203.engine.movelanguage.Or;
 import ru.nsu.fit.g14203.engine.movelanguage.UpToBorder;
@@ -26,7 +27,7 @@ public class Mage extends BasicPiece {
                 new OneOrthogonal().addConstraint(formMoveConstraint(new StartLevelConstraint(1,3))),
                 new UpToBorder(new StepMove(UP)).addConstraint(formMoveConstraint()),
                 new UpToBorder(new StepMove(DOWN)).addConstraint(formMoveConstraint())
-        );
+        ).addConstraint(new CheckConstraint());
 
         capture = new Or(
                 new UpToBorder(new StepMove(LEFT.sum(FORWARD))).addConstraint(formCaptureConstraint(new StartLevelConstraint(2))),
@@ -39,6 +40,6 @@ public class Mage extends BasicPiece {
                 new UpToBorder(new StepMove(BACKWARD)).addConstraint(formCaptureConstraint(new StartLevelConstraint(2))),
                 new UpToBorder(new StepMove(UP)).addConstraint(formCaptureConstraint()),
                 new UpToBorder(new StepMove(DOWN)).addConstraint(formCaptureConstraint())
-        );
+        ).addConstraint(new CheckConstraint());
     }
 }

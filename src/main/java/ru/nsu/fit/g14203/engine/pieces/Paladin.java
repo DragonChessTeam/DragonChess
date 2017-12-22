@@ -1,6 +1,7 @@
 package ru.nsu.fit.g14203.engine.pieces;
 
 import ru.nsu.fit.g14203.engine.api.utils.Color;
+import ru.nsu.fit.g14203.engine.constraints.CheckConstraint;
 import ru.nsu.fit.g14203.engine.constraints.StartLevelConstraint;
 import ru.nsu.fit.g14203.engine.movelanguage.Follow;
 import ru.nsu.fit.g14203.engine.movelanguage.Is;
@@ -16,7 +17,6 @@ public class Paladin extends BasicPiece {
     public Paladin(Color c) {
         color = c;
         move = new Or(
-                new RoundMove(),
                 new StepMove(LEFT.sum(FORWARD).sum(FORWARD)).addConstraint(formMoveConstraint(new StartLevelConstraint(2))),
                 new StepMove(LEFT.sum(FORWARD).sum(LEFT)).addConstraint(formMoveConstraint(new StartLevelConstraint(2))),
                 new StepMove(LEFT.sum(BACKWARD).sum(BACKWARD)).addConstraint(formMoveConstraint(new StartLevelConstraint(2))),
@@ -25,7 +25,7 @@ public class Paladin extends BasicPiece {
                 new StepMove(RIGHT.sum(BACKWARD).sum(BACKWARD)).addConstraint(formMoveConstraint(new StartLevelConstraint(2))),
                 new StepMove(RIGHT.sum(FORWARD).sum(RIGHT)).addConstraint(formMoveConstraint(new StartLevelConstraint(2))),
                 new StepMove(RIGHT.sum(FORWARD).sum(FORWARD)).addConstraint(formMoveConstraint(new StartLevelConstraint(2))),
-                new RoundMove().addConstraint(formMoveConstraint(new StartLevelConstraint(1,3))),
+                new RoundMove().addConstraint(formMoveConstraint(new StartLevelConstraint(1,2, 3))),
 
                 new Follow(new StepMove(UP), new Is(2, new StepMove(FORWARD))).addConstraint(formMoveConstraint()),
                 new Follow(new StepMove(UP), new Is(2, new StepMove(BACKWARD))).addConstraint(formMoveConstraint()),
@@ -49,10 +49,9 @@ public class Paladin extends BasicPiece {
 
 
 
-        );
+        ).addConstraint(new CheckConstraint());
 
         capture = new Or(
-                new RoundMove(),
                 new StepMove(LEFT.sum(FORWARD).sum(FORWARD)).addConstraint(formCaptureConstraint(new StartLevelConstraint(2))),
                 new StepMove(LEFT.sum(FORWARD).sum(LEFT)).addConstraint(formCaptureConstraint(new StartLevelConstraint(2))),
                 new StepMove(LEFT.sum(BACKWARD).sum(BACKWARD)).addConstraint(formCaptureConstraint(new StartLevelConstraint(2))),
@@ -61,7 +60,7 @@ public class Paladin extends BasicPiece {
                 new StepMove(RIGHT.sum(BACKWARD).sum(BACKWARD)).addConstraint(formCaptureConstraint(new StartLevelConstraint(2))),
                 new StepMove(RIGHT.sum(FORWARD).sum(RIGHT)).addConstraint(formCaptureConstraint(new StartLevelConstraint(2))),
                 new StepMove(RIGHT.sum(FORWARD).sum(FORWARD)).addConstraint(formCaptureConstraint(new StartLevelConstraint(2))),
-                new RoundMove().addConstraint(formCaptureConstraint(new StartLevelConstraint(1,3)))
-        );
+                new RoundMove().addConstraint(formCaptureConstraint(new StartLevelConstraint(1,2,3)))
+        ).addConstraint(new CheckConstraint());
     }
 }

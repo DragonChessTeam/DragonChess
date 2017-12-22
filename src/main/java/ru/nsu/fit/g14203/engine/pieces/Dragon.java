@@ -1,6 +1,7 @@
 package ru.nsu.fit.g14203.engine.pieces;
 
 import ru.nsu.fit.g14203.engine.api.utils.Color;
+import ru.nsu.fit.g14203.engine.constraints.CheckConstraint;
 import ru.nsu.fit.g14203.engine.constraints.StartLevelConstraint;
 import ru.nsu.fit.g14203.engine.movelanguage.Or;
 import ru.nsu.fit.g14203.engine.movelanguage.UpToBorder;
@@ -20,7 +21,7 @@ public class Dragon extends BasicPiece{
                 new UpToBorder(new StepMove(RIGHT.sum(FORWARD))).addConstraint(formMoveConstraint(new StartLevelConstraint(3))),
                 new UpToBorder(new StepMove(LEFT.sum(BACKWARD))).addConstraint(formMoveConstraint(new StartLevelConstraint(3))),
                 new UpToBorder(new StepMove(RIGHT.sum(BACKWARD))).addConstraint(formMoveConstraint(new StartLevelConstraint(3)))
-        );
+        ).addConstraint(new CheckConstraint());
 
         capture = new Or(
                 new RoundMove().addConstraint(formCaptureConstraint(new StartLevelConstraint(3))),
@@ -33,6 +34,6 @@ public class Dragon extends BasicPiece{
                 new StepMove(DOWN.sum(LEFT)).addConstraint(formCaptureConstraint(new StartLevelConstraint(3))),
                 new StepMove(DOWN.sum(RIGHT)).addConstraint(formCaptureConstraint(new StartLevelConstraint(3))),
                 new StepMove(DOWN.sum(BACKWARD)).addConstraint(formCaptureConstraint(new StartLevelConstraint(3)))
-        );
+        ).addConstraint(new CheckConstraint());
     }
 }

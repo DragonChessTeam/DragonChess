@@ -1,6 +1,7 @@
 package ru.nsu.fit.g14203.engine.pieces;
 
 import ru.nsu.fit.g14203.engine.api.utils.Color;
+import ru.nsu.fit.g14203.engine.constraints.CheckConstraint;
 import ru.nsu.fit.g14203.engine.constraints.StartLevelConstraint;
 import ru.nsu.fit.g14203.engine.movelanguage.Or;
 import ru.nsu.fit.g14203.engine.movelanguage.moves.StepMove;
@@ -21,7 +22,7 @@ public class Unicorn extends BasicPiece {
                 new StepMove(LEFT.sum(BACKWARD).sum(LEFT)),
                 new StepMove(RIGHT.sum(BACKWARD).sum(BACKWARD)),
                 new StepMove(RIGHT.sum(BACKWARD).sum(RIGHT))
-        ).addConstraint(formMoveConstraint(new StartLevelConstraint(2)));
+        ).addConstraint(formMoveConstraint(new StartLevelConstraint(2))).addConstraint(new CheckConstraint());
         capture = new Or(
                 new StepMove(LEFT.sum(FORWARD).sum(FORWARD)),
                 new StepMove(LEFT.sum(FORWARD).sum(LEFT)),
@@ -31,6 +32,6 @@ public class Unicorn extends BasicPiece {
                 new StepMove(LEFT.sum(BACKWARD).sum(LEFT)),
                 new StepMove(RIGHT.sum(BACKWARD).sum(BACKWARD)),
                 new StepMove(RIGHT.sum(BACKWARD).sum(RIGHT))
-        ).addConstraint(formCaptureConstraint(new StartLevelConstraint(2)));
+        ).addConstraint(formCaptureConstraint(new StartLevelConstraint(2))).addConstraint(new CheckConstraint());
     }
 }

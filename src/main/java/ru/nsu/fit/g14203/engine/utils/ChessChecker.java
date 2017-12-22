@@ -15,6 +15,9 @@ public class ChessChecker {
 
     public static boolean isCheckAfterTurn(Way move, Color side, Piece[][][] pg) {
 
+        if (move.end.x == -1 || move.end.y == -1 || move.end.z == -1) {
+            int a = 0;
+        }
         Piece savedPiece = pg[move.end.x][move.end.y][move.end.z];
         pg[move.end.x][move.end.y][move.end.z] = pg[move.start.x][move.start.y][move.start.z];
         pg[move.start.x][move.start.y][move.start.z] = null;

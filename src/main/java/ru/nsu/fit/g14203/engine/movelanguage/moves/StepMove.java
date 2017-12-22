@@ -5,7 +5,6 @@ import ru.nsu.fit.g14203.engine.api.utils.Dot3D;
 import ru.nsu.fit.g14203.engine.movelanguage.BasicMove;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class StepMove extends BasicMove {

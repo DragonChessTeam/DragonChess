@@ -1,6 +1,7 @@
 package ru.nsu.fit.g14203.engine.pieces;
 
 import ru.nsu.fit.g14203.engine.api.utils.Color;
+import ru.nsu.fit.g14203.engine.constraints.CheckConstraint;
 import ru.nsu.fit.g14203.engine.constraints.StartLevelConstraint;
 import ru.nsu.fit.g14203.engine.movelanguage.Or;
 import ru.nsu.fit.g14203.engine.movelanguage.moves.StepMove;
@@ -19,26 +20,26 @@ public class Basilisk extends BasicPiece{
                     new StepMove(FORWARD.sum(LEFT)),
                     new StepMove(FORWARD.sum(RIGHT)),
                     new StepMove(BACKWARD)
-            ).addConstraint(formMoveConstraint(new StartLevelConstraint(1)));
+            ).addConstraint(formMoveConstraint(new StartLevelConstraint(1))).addConstraint(new CheckConstraint());
 
             capture = new Or(
                     new StepMove(FORWARD),
                     new StepMove(FORWARD.sum(LEFT)),
                     new StepMove(FORWARD.sum(RIGHT))
-            ).addConstraint(formCaptureConstraint(new StartLevelConstraint(1)));
+            ).addConstraint(formCaptureConstraint(new StartLevelConstraint(1))).addConstraint(new CheckConstraint());
         } else {
             move = new Or(
                     new StepMove(BACKWARD),
                     new StepMove(BACKWARD.sum(LEFT)),
                     new StepMove(BACKWARD.sum(RIGHT)),
                     new StepMove(FORWARD)
-            ).addConstraint(formMoveConstraint(new StartLevelConstraint(1)));
+            ).addConstraint(formMoveConstraint(new StartLevelConstraint(1))).addConstraint(new CheckConstraint());
 
             capture = new Or(
                     new StepMove(BACKWARD),
                     new StepMove(BACKWARD.sum(LEFT)),
                     new StepMove(BACKWARD.sum(RIGHT))
-            ).addConstraint(formCaptureConstraint(new StartLevelConstraint(1)));
+            ).addConstraint(formCaptureConstraint(new StartLevelConstraint(1))).addConstraint(new CheckConstraint());
         }
 
 
