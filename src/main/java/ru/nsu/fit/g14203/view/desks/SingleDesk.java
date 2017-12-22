@@ -1,7 +1,6 @@
 package ru.nsu.fit.g14203.view.desks;
 
 import ru.nsu.fit.g14203.engine.api.Piece;
-import ru.nsu.fit.g14203.engine.api.utils.Dot3D;
 import ru.nsu.fit.g14203.view.BoardImage;
 
 import java.awt.*;
