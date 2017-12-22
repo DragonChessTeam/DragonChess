@@ -11,6 +11,11 @@ public class Dot3D {
     public Dot3D() {}
 
     @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (o == null || !(o instanceof Dot3D)) return false;
         Dot3D other = (Dot3D)o;

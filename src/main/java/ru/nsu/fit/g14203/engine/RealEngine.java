@@ -1,11 +1,10 @@
 package ru.nsu.fit.g14203.engine;
 
+import ru.nsu.fit.g14203.engine.Initializer.EngineInitializer;
 import ru.nsu.fit.g14203.engine.api.Engine;
 import ru.nsu.fit.g14203.engine.api.Observer;
 import ru.nsu.fit.g14203.engine.api.Piece;
 import ru.nsu.fit.g14203.engine.api.utils.*;
-import ru.nsu.fit.g14203.engine.pieces.King;
-import ru.nsu.fit.g14203.engine.constraints.triggers.BasiliskTrigger;
 import ru.nsu.fit.g14203.engine.constraints.triggers.Trigger;
 import ru.nsu.fit.g14203.engine.utils.ChessChecker;
 
@@ -26,17 +25,9 @@ public class RealEngine implements Engine {
     private List<Observer> observers = new ArrayList<>();
     private List<Trigger> triggers = new ArrayList<>();
 
-    public RealEngine() {
-        for (int x = 0; x < boards.length; x++)
-            for (int y = 0; y < boards[0].length; y++)
-                for (int z = 0; z < boards[0][0].length; z++) {
-                    if (x < 4) boards[x][y][z] = new King(WHITE, boards);
-                    if (x >= 6) boards[x][y][z] = new King(BLACK, boards);
-                }
-
-//        boards[1][1][1] = new King(WHITE, boards);
-//        boards[1][3][1] = new King(BLACK, boards);
-        triggers.add(new BasiliskTrigger());
+    public RealEngine(EngineInitializer init) {
+        init.init(boards);
+//        triggers.add(new BasiliskTrigger());
     }
 
     private EngineResponse shiftPiece(Dot3D start, Dot3D end, boolean isCapture, Piece[][][] boards) {
@@ -72,9 +63,20 @@ public class RealEngine implements Engine {
         if (moveResult == WRONG_WAY) {
             return WRONG_WAY;
         }
-        if ((color == WHITE && ChessChecker.isCheckMateFor(BLACK, boards)) || (color == BLACK && ChessChecker.isCheckMateFor(WHITE, boards))) {
-            state = GAME_OVER;
-            out = CHECK_MATE;
+
+        Color oppositColor;
+        if (color == WHITE) {
+            oppositColor = BLACK;
+        } else {
+            oppositColor = WHITE;
+        }
+        if (ChessChecker.isCheckFor(oppositColor, boards)) {
+            if (ChessChecker.isCheckMateFor(oppositColor, boards)) {
+                state = GAME_OVER;
+                out = CHECK_MATE;
+            } else {
+                out = CHECK;
+            }
         }
 
         switch (state) {

@@ -15,7 +15,7 @@ public abstract class BasicMove implements Move{
     abstract protected List<Dot3D> doMove(Dot3D pos, Piece[][][] boards);
 
     public List<Dot3D> getMovesFrom(Dot3D pos, Piece[][][] boards) {
-        List<Dot3D> out = doMove(pos,boards );
+        List<Dot3D> out = doMove(pos,boards);
 
         if (constraints != null)
         for (Constraint c : constraints) {

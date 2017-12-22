@@ -7,12 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UpToBorder extends BasicMove {
-    private Piece[][][] pl;
     private Move m;
 
 
-    public UpToBorder(Piece[][][] playground, Move move) {
-        pl = playground;
+    public UpToBorder(Move move) {
         m = move;
     }
 
@@ -31,7 +29,7 @@ public class UpToBorder extends BasicMove {
             stepOut = new ArrayList<>();
             stepIsGood = false;
             for (Dot3D start : stepIn) {
-                if (start.x >= 0 && start.x < pl.length && start.y >= 0 && start.y < pl[0].length && start.z >= 0 && start.z < pl[0][0].length) {
+                if (start.x >= 0 && start.x < boards.length && start.y >= 0 && start.y < boards[0].length && start.z >= 0 && start.z < boards[0][0].length) {
                     stepOut.addAll(m.getMovesFrom(start, boards));
                     stepIsGood = true;
                 }

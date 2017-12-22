@@ -5,6 +5,7 @@ import ru.nsu.fit.g14203.engine.api.Piece;
 import ru.nsu.fit.g14203.engine.api.utils.Dot3D;
 import ru.nsu.fit.g14203.engine.api.utils.UpdateEntry;
 import ru.nsu.fit.g14203.engine.pieces.King;
+import ru.nsu.fit.g14203.engine.pieces.TestPiece;
 
 import java.util.List;
 
@@ -44,6 +45,13 @@ public class ObserverMock implements Observer {
                                 System.out.print("*");
                             } else {
                                 System.out.print("#");
+                            }
+                        }
+                        else  if (boards[x][y][z] instanceof TestPiece) {
+                            if (boards[x][y][z].getColor() == WHITE) {
+                                System.out.print("$");
+                            } else {
+                                System.out.print("%");
                             }
                         }
                     else

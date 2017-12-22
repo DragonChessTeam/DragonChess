@@ -15,11 +15,9 @@ import static ru.nsu.fit.g14203.engine.api.utils.Dot3D.UP;
 import static ru.nsu.fit.g14203.engine.constraints.ConstraintFormer.formCaptureConstraint;
 import static ru.nsu.fit.g14203.engine.constraints.ConstraintFormer.formMoveConstraint;
 
-public class King extends BasicPiece {
-
+public class TestPiece extends BasicPiece{
     private Dot3D previousPos;
-
-    public King(Color c) {
+    public TestPiece(Color c) {
         color = c;
         move = new Or(
                 new RoundMove(),

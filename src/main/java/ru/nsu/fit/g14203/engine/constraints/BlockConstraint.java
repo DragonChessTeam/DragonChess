@@ -6,7 +6,7 @@ import ru.nsu.fit.g14203.engine.api.utils.Dot3D;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BlockContraint implements Constraint {
+public class BlockConstraint implements Constraint {
 
 
 

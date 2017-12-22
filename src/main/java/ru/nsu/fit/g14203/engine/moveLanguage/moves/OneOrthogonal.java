@@ -5,23 +5,23 @@ import ru.nsu.fit.g14203.engine.api.utils.Dot3D;
 import ru.nsu.fit.g14203.engine.moveLanguage.BasicMove;
 import ru.nsu.fit.g14203.engine.moveLanguage.Move;
 import ru.nsu.fit.g14203.engine.moveLanguage.Or;
+import ru.nsu.fit.g14203.engine.pieces.BasicPiece;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static ru.nsu.fit.g14203.engine.api.utils.Dot3D.*;
+import static ru.nsu.fit.g14203.engine.api.utils.Dot3D.BACKWARD;
+import static ru.nsu.fit.g14203.engine.api.utils.Dot3D.NONE;
 
-public class RoundMove extends BasicMove {
+public class OneOrthogonal extends BasicMove {
 
     private Move move;
 
-    public RoundMove() {
+    public OneOrthogonal() {
         List<Move> moves = new ArrayList<>();
-        for (Dot3D a : new Dot3D[]{LEFT, RIGHT, NONE})
-            for (Dot3D b : new Dot3D[]{FORWARD, BACKWARD, NONE}) {
-                if (a == b) continue;
-                moves.add(new StepMove(a.sum(b)));
-            }
+        for (Dot3D a : new Dot3D[]{LEFT, RIGHT, FORWARD, BACKWARD})
+            moves.add(new StepMove(a));
         Move[] moveArr = new Move[moves.size()];
         moves.toArray(moveArr);
         move = new Or(moveArr);
@@ -29,6 +29,7 @@ public class RoundMove extends BasicMove {
 
 
     public List<Dot3D> doMove(Dot3D pos, Piece[][][] boards) {
+
         return move.getMovesFrom(pos, boards);
 
     }
