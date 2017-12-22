@@ -5,7 +5,6 @@ import ru.nsu.fit.g14203.engine.api.Piece;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.geom.Dimension2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
