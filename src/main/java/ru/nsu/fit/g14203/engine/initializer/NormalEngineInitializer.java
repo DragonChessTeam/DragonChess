@@ -41,7 +41,7 @@ public class NormalEngineInitializer implements EngineInitializer {
         for (int i = 0; i < 12; i ++) {
             boards[i][1][1] = new Warrior(BLACK);
         }
-//
+
 //        boards[0][7][1] = new Oliphant(WHITE);
 //        boards[11][7][1] = new Oliphant(WHITE);
 //        boards[1][7][1] = new Unicorn(WHITE);
@@ -57,8 +57,8 @@ public class NormalEngineInitializer implements EngineInitializer {
         for (int i = 0; i < 12; i ++) {
             boards[i][6][1] = new Warrior(WHITE);
         }
-//
-//        //Bottom board
+
+        //Bottom board
 //        boards[2][0][0] = new Basilisk(BLACK);
 //        boards[6][0][0] = new Elemental(BLACK);
 //        boards[10][0][0] = new Basilisk(BLACK);
@@ -69,8 +69,8 @@ public class NormalEngineInitializer implements EngineInitializer {
 //        boards[2][7][0] = new Basilisk(WHITE);
 //        boards[6][7][0] = new Elemental(WHITE);
 //        boards[10][7][0] = new Basilisk(WHITE);
-        for (int i = 1; i < 12; i += 2) {
-            boards[i][6][0] = new Sylph(WHITE);
-        }
+//        for (int i = 1; i < 12; i += 2) {
+//            boards[i][6][0] = new Sylph(WHITE);
+//        }
     }
 }

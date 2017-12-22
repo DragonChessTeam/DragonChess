@@ -3,11 +3,12 @@ package ru.nsu.fit.g14203.net.channel;
 import ru.nsu.fit.g14203.engine.api.Piece;
 import ru.nsu.fit.g14203.engine.api.utils.Color;
 import ru.nsu.fit.g14203.engine.api.utils.Dot3D;
+import ru.nsu.fit.g14203.engine.pieces.BasicPiece;
 
 import java.util.List;
 import java.util.Objects;
 
-public class TestPiece implements Piece {
+public class TestPiece extends BasicPiece {
 
     private final Color color;
 
