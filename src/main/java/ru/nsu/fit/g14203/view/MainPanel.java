@@ -34,9 +34,11 @@ public class MainPanel extends JPanel implements Observer{
                 switch (e.getKeyCode()){
                     case KeyEvent.VK_RIGHT: //rightSwipe();
                         deskSwiper.incrementIndex();
+                        //deskSwiper.getDesk().drawPiece(1,1);
                         repaint();
                         break;
                     case KeyEvent.VK_LEFT: deskSwiper.decrementIndex();
+                        deskSwiper.getDesk().drawPiece(2,2);
                         repaint();
                         break;
                     default: break;

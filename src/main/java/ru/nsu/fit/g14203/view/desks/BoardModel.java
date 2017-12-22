@@ -2,10 +2,13 @@ package ru.nsu.fit.g14203.view.desks;
 
 import ru.nsu.fit.g14203.engine.api.Piece;
 
+import java.util.List;
+
 
 public class BoardModel {
 
-    Piece[][] board;
+    private Piece[][] board;
+
 
 
     public BoardModel(){
@@ -34,4 +37,7 @@ public class BoardModel {
         board[i][j] = null;
     }
 
+    public Piece[][] getBoard() {
+        return board;
+    }
 }

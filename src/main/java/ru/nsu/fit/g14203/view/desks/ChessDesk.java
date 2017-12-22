@@ -14,6 +14,9 @@ public interface ChessDesk {
 
     public void addPiece(int i, int j, Piece piece);
 
-    public void movePiece(int i, int j, int i1, int j1);a
+    public void movePiece(int i, int j, int i1, int j1);
+
+    public void drawPiece(int i, int j);
+
 
 }

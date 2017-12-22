@@ -3,6 +3,7 @@ package ru.nsu.fit.g14203.view.desks;
 import ru.nsu.fit.g14203.engine.api.Piece;
 import ru.nsu.fit.g14203.view.BoardImage;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class SingleDesk implements ChessDesk{
@@ -16,8 +17,9 @@ public class SingleDesk implements ChessDesk{
     }
 
     @Override
-    public BufferedImage getDeskImage(int windowWidth, int windowHeight) {
-        return boardImage.getImage(windowWidth, windowHeight);
+    public BufferedImage getDeskImage(int windowWidth, int windowHeight) { //add drawing pieces
+
+        return boardImage.getImage(windowWidth, windowHeight, boardModel.getBoard());
     }
 
     @Override
@@ -25,10 +27,10 @@ public class SingleDesk implements ChessDesk{
         boardModel.deletePiece(i,j);
     }
 
+
     @Override
     public void addPiece(int i, int j, Piece piece){
         boardModel.addPiece(i, j, piece);
-        
     }
 
     @Override
@@ -39,5 +41,9 @@ public class SingleDesk implements ChessDesk{
     @Override
     public void onBoardClick(int x, int y) {
 
+    }
+
+    @Override
+    public void drawPiece(int i, int j) {
     }
 }
