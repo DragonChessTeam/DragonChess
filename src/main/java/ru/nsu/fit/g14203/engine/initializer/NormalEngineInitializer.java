@@ -37,7 +37,7 @@ public class NormalEngineInitializer implements EngineInitializer {
 //        boards[4][0][1] = new Cleric(BLACK);
 //        boards[7][0][1] = new Paladin(BLACK);
 //        boards[5][0][1] = new Mage(BLACK);
-//        boards[6][0][1] = new King(BLACK);
+        boards[6][0][1] = new King(BLACK);
         for (int i = 0; i < 12; i ++) {
             boards[i][1][1] = new Warrior(BLACK);
         }
