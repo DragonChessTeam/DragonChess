@@ -64,4 +64,7 @@ public class DeskSwiper {
         else return null;
     }
 
+    public ChessDesk getDesk(int index){
+        return deskList.get(index);
+    }
 }
