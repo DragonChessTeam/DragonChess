@@ -1,5 +1,6 @@
 package ru.nsu.fit.g14203.engine.constraints.triggers;
 
+import ru.nsu.fit.g14203.engine.api.utils.UpdateEntry;
 import ru.nsu.fit.g14203.engine.pieces.Basilisk;
 import ru.nsu.fit.g14203.engine.utils.PieceFinder;
 import ru.nsu.fit.g14203.engine.api.Piece;
@@ -15,7 +16,7 @@ public class BasiliskTrigger implements Trigger {
     List<Piece> addedPreviouslyConstraints = new ArrayList<>();
 
     @Override
-    public void apply(Piece[][][] boards) {
+    public void apply(Piece[][][] boards, List<UpdateEntry> updates) {
         //Delete old constraints
         for (Piece p : addedPreviouslyConstraints) {
             p.getMoveAlg().removeConstraint(Immobilized.class);

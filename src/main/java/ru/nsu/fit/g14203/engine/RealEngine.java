@@ -1,5 +1,6 @@
 package ru.nsu.fit.g14203.engine;
 
+import ru.nsu.fit.g14203.engine.constraints.triggers.DragonTrigger;
 import ru.nsu.fit.g14203.engine.initializer.EngineInitializer;
 import ru.nsu.fit.g14203.engine.api.Engine;
 import ru.nsu.fit.g14203.engine.api.Observer;
@@ -29,6 +30,7 @@ public class RealEngine implements Engine {
     public RealEngine(EngineInitializer init) {
         init.init(boards);
         triggers.add(new BasiliskTrigger());
+        triggers.add(new DragonTrigger());
     }
 
     private EngineResponse shiftPiece(Dot3D start, Dot3D end, boolean isCapture, Piece[][][] boards) {
@@ -56,6 +58,7 @@ public class RealEngine implements Engine {
     }
 
     private EngineResponse doTurn(Color color, Dot3D start, Dot3D end, boolean isCapture) {
+        List<UpdateEntry> updates = new ArrayList<>();
         if (state == GAME_OVER) return CHECK_MATE;
         if (!((color == WHITE && state == WHITE_TURN) || (color == BLACK && state == BLACK_TURN))) return OTHER_PLAYER_TURN;
 
@@ -91,12 +94,11 @@ public class RealEngine implements Engine {
                 break;
         }
 
+        updates.add(new UpdateEntry(null, start, end));
         for (Trigger t : triggers) {
-            t.apply(boards);
+            t.apply(boards, updates);
         }
 
-        List<UpdateEntry> updates = new ArrayList<>();
-        updates.add(new UpdateEntry(null, start, end));
         notifyObservers(updates);
         return out;
     }
