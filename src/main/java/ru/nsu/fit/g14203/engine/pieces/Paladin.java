@@ -9,6 +9,7 @@ import ru.nsu.fit.g14203.engine.movelanguage.moves.RoundMove;
 import ru.nsu.fit.g14203.engine.movelanguage.moves.StepMove;
 
 import static ru.nsu.fit.g14203.engine.api.utils.Dot3D.*;
+import static ru.nsu.fit.g14203.engine.constraints.ConstraintFormer.formCaptureConstraint;
 import static ru.nsu.fit.g14203.engine.constraints.ConstraintFormer.formMoveConstraint;
 
 public class Paladin extends BasicPiece {
@@ -25,6 +26,7 @@ public class Paladin extends BasicPiece {
                 new StepMove(RIGHT.sum(FORWARD).sum(RIGHT)).addConstraint(formMoveConstraint(new StartLevelConstraint(2))),
                 new StepMove(RIGHT.sum(FORWARD).sum(FORWARD)).addConstraint(formMoveConstraint(new StartLevelConstraint(2))),
                 new RoundMove().addConstraint(formMoveConstraint(new StartLevelConstraint(1,3))),
+
                 new Follow(new StepMove(UP), new Is(2, new StepMove(FORWARD))).addConstraint(formMoveConstraint()),
                 new Follow(new StepMove(UP), new Is(2, new StepMove(BACKWARD))).addConstraint(formMoveConstraint()),
                 new Follow(new StepMove(UP), new Is(2, new StepMove(LEFT))).addConstraint(formMoveConstraint()),
@@ -47,6 +49,19 @@ public class Paladin extends BasicPiece {
 
 
 
+        );
+
+        capture = new Or(
+                new RoundMove(),
+                new StepMove(LEFT.sum(FORWARD).sum(FORWARD)).addConstraint(formCaptureConstraint(new StartLevelConstraint(2))),
+                new StepMove(LEFT.sum(FORWARD).sum(LEFT)).addConstraint(formCaptureConstraint(new StartLevelConstraint(2))),
+                new StepMove(LEFT.sum(BACKWARD).sum(BACKWARD)).addConstraint(formCaptureConstraint(new StartLevelConstraint(2))),
+                new StepMove(LEFT.sum(BACKWARD).sum(LEFT)).addConstraint(formCaptureConstraint(new StartLevelConstraint(2))),
+                new StepMove(RIGHT.sum(BACKWARD).sum(RIGHT)).addConstraint(formCaptureConstraint(new StartLevelConstraint(2))),
+                new StepMove(RIGHT.sum(BACKWARD).sum(BACKWARD)).addConstraint(formCaptureConstraint(new StartLevelConstraint(2))),
+                new StepMove(RIGHT.sum(FORWARD).sum(RIGHT)).addConstraint(formCaptureConstraint(new StartLevelConstraint(2))),
+                new StepMove(RIGHT.sum(FORWARD).sum(FORWARD)).addConstraint(formCaptureConstraint(new StartLevelConstraint(2))),
+                new RoundMove().addConstraint(formCaptureConstraint(new StartLevelConstraint(1,3)))
         );
     }
 }
