@@ -2,6 +2,7 @@ package ru.nsu.fit.g14203.engine.pieces;
 
 import ru.nsu.fit.g14203.engine.api.utils.Color;
 import ru.nsu.fit.g14203.engine.api.utils.Dot3D;
+import ru.nsu.fit.g14203.engine.constraints.CheckConstraint;
 import ru.nsu.fit.g14203.engine.constraints.StartLevelConstraint;
 import ru.nsu.fit.g14203.engine.movelanguage.Or;
 import ru.nsu.fit.g14203.engine.movelanguage.moves.AbsoluteMove;
@@ -31,7 +32,7 @@ public class Sylph extends BasicPiece{
                             new AbsoluteMove(new Dot3D(8, 6, 2)),
                             new AbsoluteMove(new Dot3D(10, 6, 2))
                     ).addConstraint(formMoveConstraint(new StartLevelConstraint(2)))
-            );
+            ).addConstraint(new CheckConstraint());
 
             capture = new Or(
                     new StepMove(FORWARD),

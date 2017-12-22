@@ -20,6 +20,11 @@ public class BasicPiece implements Piece {
     }
 
     @Override
+    public String getName() {
+        return this.getClass().getName().substring(0,3);
+    }
+
+    @Override
     public List<Dot3D> getAvailableMoves(Dot3D position, Piece[][][] boards) {
         return move.getMovesFrom(position, boards);
     }

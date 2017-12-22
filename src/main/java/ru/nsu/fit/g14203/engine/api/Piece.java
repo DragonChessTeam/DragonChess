@@ -9,6 +9,7 @@ import java.util.List;
 public interface Piece {
 
     Color getColor();
+    String getName();
     List<Dot3D> getAvailableMoves(Dot3D position, Piece[][][] boards);
     List<Dot3D> getAvailableCaptures(Dot3D position, Piece[][][] boards);
 

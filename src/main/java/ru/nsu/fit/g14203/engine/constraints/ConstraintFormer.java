@@ -12,7 +12,6 @@ public class ConstraintFormer {
         out.add(new BoardBorderConstraint());
         out.addAll(Arrays.asList(additionConstrs));
         out.add(new BlockConstraint());
-        out.add(new CheckConstraint());
         Constraint[] stockArr = new Constraint[out.size()];
         out.toArray(stockArr);
         return stockArr;
@@ -23,7 +22,6 @@ public class ConstraintFormer {
         out.add(new BoardBorderConstraint());
         out.addAll(Arrays.asList(additionConstrs));
         out.add(new BlockAllyAndVoidCaptureConstraint());
-        out.add(new CheckConstraint());
         Constraint[] stockArr = new Constraint[out.size()];
         out.toArray(stockArr);
         return stockArr;
