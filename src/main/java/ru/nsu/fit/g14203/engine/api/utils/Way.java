@@ -12,6 +12,7 @@ public class Way {
     @JsonCreator
     public Way(@JsonProperty(value = "start") Dot3D pos,
                @JsonProperty(value = "end") Dot3D endPoint) {
+
         end = endPoint;
         start = pos;
     }

@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Objects;
-
 public class Dot3D {
 
     public int x;
@@ -15,10 +14,17 @@ public class Dot3D {
 
     public Dot3D() {}
 
+
+    @Override
+    public String toString() {
+        return "["+x+","+y+","+z+"]";
+    }
+
     @JsonCreator
     public Dot3D(@JsonProperty(value = "x") int x,
                  @JsonProperty(value = "y") int y,
                  @JsonProperty(value = "z") int z) {
+
         this.x = x;
         this.y = y;
         this.z = z;
@@ -49,4 +55,14 @@ public class Dot3D {
     public int hashCode() {
         return Objects.hash(x, y, z);
     }
+
+
+
+    public static final Dot3D UP = new Dot3D(0,0,1);
+    public static final Dot3D DOWN = new Dot3D(0,0,-1);
+    public static final Dot3D LEFT = new Dot3D(-1,0,0);
+    public static final Dot3D RIGHT = new Dot3D(1,0,0);
+    public static final Dot3D FORWARD = new Dot3D(0,-1,0);
+    public static final Dot3D BACKWARD = new Dot3D(0,1,0);
+    public static final Dot3D NONE = new Dot3D(0,0,0);
 }
