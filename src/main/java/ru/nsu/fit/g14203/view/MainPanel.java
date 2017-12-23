@@ -3,6 +3,7 @@ package ru.nsu.fit.g14203.view;
 import ru.nsu.fit.g14203.engine.RealEngine;
 import ru.nsu.fit.g14203.engine.api.Engine;
 import ru.nsu.fit.g14203.engine.api.Observer;
+import ru.nsu.fit.g14203.engine.api.utils.Color;
 import ru.nsu.fit.g14203.engine.api.utils.Dot3D;
 import ru.nsu.fit.g14203.engine.api.utils.UpdateEntry;
 import ru.nsu.fit.g14203.engine.initializer.NormalEngineInitializer;
@@ -23,7 +24,7 @@ public class MainPanel extends JPanel implements Observer{
     private Engine engine;
 
 
-    public MainPanel(Engine engine){
+    public MainPanel(Engine engine, Color color){
 
         setLayout(new BorderLayout());
         setFocusable(true);
@@ -34,6 +35,8 @@ public class MainPanel extends JPanel implements Observer{
         deskSwiper = new DeskSwiper(new SingleDesk("resources/redboard.jpg", 600, 400),
                 new SingleDesk("resources/greenboard.jpg", 600, 400),
                 new SingleDesk("resources/blueboard.jpg", 600, 400));
+
+        deskSwiper.setColor(color);
 
         addKeyListener(new KeyAdapter() {
 

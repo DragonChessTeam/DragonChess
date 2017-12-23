@@ -17,7 +17,8 @@ public class DeskSwiper {
     private LinkedList<ChessDesk> deskList;
     private int currentIndex;
     private Dot3D chosenDot;
-    private static Color myColor = Color.WHITE; //TODO: set real color
+
+    private Color myColor;
 
 
     DeskSwiper(ChessDesk ... desks){
@@ -27,6 +28,11 @@ public class DeskSwiper {
 
         currentIndex = 0;
     }
+
+    public void setColor(Color myColor) {
+        this.myColor = myColor;
+    }
+
 
     public void addDesk(ChessDesk desk){
         deskList.add(desk);

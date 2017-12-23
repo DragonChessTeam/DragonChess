@@ -1,6 +1,7 @@
 package ru.nsu.fit.g14203.view;
 
 import ru.nsu.fit.g14203.engine.api.Engine;
+import ru.nsu.fit.g14203.engine.api.utils.Color;
 import ru.nsu.fit.g14203.view.utils.MainFrame;
 
 import javax.swing.*;
@@ -23,10 +24,10 @@ public class InitMainWindow extends MainFrame {
     private static int windowHeight = 600;
     private MainPanel mainPanel;
 
-    public InitMainWindow(Engine engine)
+    public InitMainWindow(Engine engine, Color color)
     {
         super(windowWidth, windowHeight, "Dragonchess");
-        mainPanel = new MainPanel(engine);
+        mainPanel = new MainPanel(engine, color);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         add(mainPanel);
